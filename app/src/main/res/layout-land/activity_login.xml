@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context="com.strom.strongfit.LoginActivity"
+    android:background="@color/primary_color">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_name"
+        android:layout_marginTop="8dp"
+        android:id="@+id/textView"
+        android:textColor="@color/text_color"
+        android:textSize="35sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/input_email"
+        android:hint="@string/hint_email"
+        android:textColor="@color/text_color"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/input_password"
+        android:hint="@string/hint_pass"
+        android:textColor="@color/text_color"
+        android:layout_below="@+id/input_email"
+        android:layout_alignLeft="@+id/input_email"
+        android:layout_alignStart="@+id/input_email"
+        android:layout_marginTop="25dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_entrar"
+        android:id="@+id/btn_entrar"
+        android:layout_below="@+id/input_password"
+        android:layout_marginTop="15dp"
+        android:layout_alignRight="@+id/input_password"
+        android:layout_alignEnd="@+id/input_password"
+        android:layout_alignLeft="@+id/input_password"
+        android:layout_alignStart="@+id/input_password"
+        android:onClick="onClickEntrar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_registrate"
+        android:id="@+id/text_registro"
+        android:layout_below="@+id/btn_entrar"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/light_primary_color"
+        android:onClick="onClickRegistro"
+        android:clickable="true"/>
+</RelativeLayout>
