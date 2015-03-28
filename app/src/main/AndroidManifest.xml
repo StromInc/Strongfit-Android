@@ -25,6 +25,15 @@
             android:name=".RegistroActivity"
             android:label="@string/title_activity_registro" >
         </activity>
+        <activity
+            android:name=".MainMedicoActivity"
+            android:label="@string/app_name"
+            android:theme="@style/NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
     </application>
 
 </manifest>

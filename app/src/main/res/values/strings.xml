@@ -1,11 +1,26 @@
 <resources>
     <string name="app_name">Strongfit</string>
-    <string name="text_registrate">Registrate</string>
-    <string name="btn_entrar">Entrar</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_pass">Password</string>
+
     <string name="title_activity_login">Login</string>
     <string name="title_activity_registro">Unete a Strongfit</string>
+    <string name="text_registrate">Registrate</string>
+    <string name="title_activity_profile">Mi perfil</string>
+    <string name="articulos_fragment">Articulos</string>
+    <string name="chat_fragment">Chat</string>
+
+    <string name="btn_entrar">Entrar</string>
     <string name="btn_listo">Listo</string>
+
+    <string name="hint_email">Email</string>
+    <string name="hint_pass">Password</string>
     <string name="hint_name">Nombre</string>
+
+    <string name="action_profile">Perfil</string>
+    <string name="action_cerrar">Cerrar Sesion</string>
+
+    <array name="titles_medico">
+        <item>Articulos</item>
+        <item>Chat</item>
+    </array>
+
 </resources>

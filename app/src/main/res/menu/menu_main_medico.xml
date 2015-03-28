@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.strom.strongfit.MainMedicoActivity">
+    <item
+        android:id="@+id/action_perfil"
+        android:title="@string/action_profile"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_cerrar"
+        android:title="@string/action_cerrar"
+        android:orderInCategory="200"
+        app:showAsAction="never" />
+</menu>

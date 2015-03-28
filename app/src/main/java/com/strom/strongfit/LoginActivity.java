@@ -27,11 +27,19 @@ public class LoginActivity extends ActionBarActivity {
     public void onClickEntrar(View view) {
         email = input_email.getText().toString();
         password = input_password.getText().toString();
+        Intent intent;
 
         if (email.equals("paciente@gmail.com") && password.equals("123")) {
             Toast.makeText(this, "Entrar", Toast.LENGTH_SHORT).show(); //Un pequeño mensaje
-        }else{
-            Toast.makeText(this, "paciente@gmail.com y 123", Toast.LENGTH_SHORT).show(); //Un pequeño mensaje
+        }else {
+            if (email.equals("medico@gmail.com") && password.equals("123")) {
+                finish();
+                intent = new Intent(this, MainMedicoActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(this, "paciente@gmail.com o medico@gmail.com y 123", Toast.LENGTH_SHORT).show();
+
+            }
         }
     }
     public void onClickRegistro(View view){
