@@ -13,10 +13,12 @@ import com.strom.strongfit.fragments.ChatFragment;
 public class CustomPagerAdapter extends FragmentStatePagerAdapter {
     String[] titles;
     Fragment[] fragments;
+    //Recuperamos los titulos y manejamos los fragments con un array
+    //Se podria pasar los titulos y fragmentos por separado
     public CustomPagerAdapter(FragmentManager fm, String[] titles) {
-
         super(fm);
         this.titles = titles;
+        //Estos son los fragmentos (Las vistas por pestaña)
         fragments = new Fragment[]{
                 new ArticulosFragment(),
                 new ChatFragment()

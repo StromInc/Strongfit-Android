@@ -1,13 +1,12 @@
 package com.strom.strongfit;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewParent;
 import android.widget.Toast;
 
 import com.strom.strongfit.adapters.CustomPagerAdapter;
@@ -16,38 +15,42 @@ import com.strom.strongfit.util.SlidingTabLayout;
 
 public class MainMedicoActivity extends ActionBarActivity {
 
-    CustomPagerAdapter pagerAdapter;
-    SlidingTabLayout slidingTabLayout;
+    private CustomPagerAdapter pagerAdapter;
+    private SlidingTabLayout slidingTabLayout;
     private String[] titles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_medico);
+
         setToolBar();
         setTabsAndPager();
     }
-
+    //Este metodo crea la barra de navegacion
     public void setToolBar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.medico_toolbar);
         setSupportActionBar(toolbar);
     }
+    //Con esto hacemos la navegacion
     public void setTabsAndPager(){
+        //Recuperamos los nombres de las pestañas
         titles = getResources().getStringArray(R.array.titles_medico);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_medico);
-        pagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), titles);
-        viewPager.setAdapter(pagerAdapter);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_medico); //Obtenemos el viewpager necesario para paginar
+        pagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), titles); //se crea un adaptardor para el viewpager
+        viewPager.setAdapter(pagerAdapter); //Le pasamos el adaptador (Los fragmentos)
 
-        slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
-        slidingTabLayout.setDistributeEvenly(true);
+        //Esto solo es necesario si se quiere navegacion por tabs
+        slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs); //Recuperamos el sliding
+        slidingTabLayout.setDistributeEvenly(true); //Para que todos los titulos ocupen el mismo espacio en el menu
         slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.accent_color);
+                return getResources().getColor(R.color.accent_color); //El color de la barrita del titulo
             }
         });
-        slidingTabLayout.setViewPager(viewPager);
+        slidingTabLayout.setViewPager(viewPager); //Le pasamos el viewpager para que haga su trabajo
     }
 
 
@@ -57,7 +60,7 @@ public class MainMedicoActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main_medico, menu);
         return true;
     }
-
+    //Este metodo cuando se selecciona cerrar sesion o perfil del OptionsMenu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
