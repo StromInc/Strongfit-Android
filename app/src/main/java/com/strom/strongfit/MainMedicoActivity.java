@@ -29,7 +29,7 @@ public class MainMedicoActivity extends ActionBarActivity {
     }
     //Este metodo crea la barra de navegacion
     public void setToolBar(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.medico_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
     //Con esto hacemos la navegacion
@@ -57,7 +57,7 @@ public class MainMedicoActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main_medico, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
     //Este metodo cuando se selecciona cerrar sesion o perfil del OptionsMenu

@@ -34,6 +34,11 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" >
         </activity>
+        <activity
+            android:name=".MainPacienteActivity"
+            android:label="@string/app_name"
+            android:theme="@style/NoActionBar">
+        </activity>
     </application>
 
 </manifest>
