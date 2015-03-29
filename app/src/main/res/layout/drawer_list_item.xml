@@ -6,9 +6,8 @@
     android:gravity="center_vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:textColor="@color/text_color"
+    android:textColor="@color/secondary_text_color"
     android:textSize="16sp"
     android:textStyle="bold"
     android:minHeight="48dip"
-    android:background="@color/accent_color"
-    android:textColorHighlight="@color/secondary_text_color"/>
+    android:background="?android:attr/activatedBackgroundIndicator"/>

@@ -2,6 +2,7 @@ package com.strom.strongfit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.strom.strongfit.adapters.CustomPagerAdapter;
+import com.strom.strongfit.fragments.ArticulosFragment;
+import com.strom.strongfit.fragments.ChatFragment;
 import com.strom.strongfit.util.SlidingTabLayout;
 
 
@@ -18,6 +21,7 @@ public class MainMedicoActivity extends ActionBarActivity {
     private CustomPagerAdapter pagerAdapter;
     private SlidingTabLayout slidingTabLayout;
     private String[] titles;
+    private Fragment[] fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +40,12 @@ public class MainMedicoActivity extends ActionBarActivity {
     public void setTabsAndPager(){
         //Recuperamos los nombres de las pestañas
         titles = getResources().getStringArray(R.array.titles_medico);
-
+        fragments = new Fragment[]{
+                new ArticulosFragment(),
+                new ChatFragment()
+        };
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_medico); //Obtenemos el viewpager necesario para paginar
-        pagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), titles); //se crea un adaptardor para el viewpager
+        pagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), fragments, titles); //se crea un adaptardor para el viewpager
         viewPager.setAdapter(pagerAdapter); //Le pasamos el adaptador (Los fragmentos)
 
         //Esto solo es necesario si se quiere navegacion por tabs

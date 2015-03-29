@@ -15,14 +15,11 @@ public class CustomPagerAdapter extends FragmentStatePagerAdapter {
     Fragment[] fragments;
     //Recuperamos los titulos y manejamos los fragments con un array
     //Se podria pasar los titulos y fragmentos por separado
-    public CustomPagerAdapter(FragmentManager fm, String[] titles) {
+    public CustomPagerAdapter(FragmentManager fm, Fragment[]fragments, String[] titles) {
         super(fm);
         this.titles = titles;
         //Estos son los fragmentos (Las vistas por pestaña)
-        fragments = new Fragment[]{
-                new ArticulosFragment(),
-                new ChatFragment()
-        };
+        this.fragments = fragments;
     }
 
     @Override
@@ -37,12 +34,6 @@ public class CustomPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return titles[position];
-            case 1:
-                return titles[position];
-        }
-        return "";
+        return titles[position];
     }
 }

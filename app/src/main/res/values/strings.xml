@@ -27,7 +27,7 @@
         <item>Mis datos</item>
     </array>
     <array name="list_titles">
-        <item>Conteo</item>
+        <item>Conteo calorico</item>
         <item>Articulos</item>
         <item>Chat</item>
     </array>
@@ -35,8 +35,7 @@
     <string name="drawer_open">Abrir</string>
     <string name="drawer_close">Cerrar</string>
 
-    <string name="conteo_fragment">Conteo</string>
+    <string name="consumo_fragment">Consumo</string>
+    <string name="datos_fragment">Mis datos</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
