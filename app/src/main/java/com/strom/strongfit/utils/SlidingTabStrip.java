@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.strom.strongfit.util;
+package com.strom.strongfit.utils;
 
 import android.R;
 import android.content.Context;

@@ -13,7 +13,8 @@ import android.widget.Toast;
 import com.strom.strongfit.adapters.CustomPagerAdapter;
 import com.strom.strongfit.fragments.ArticulosFragment;
 import com.strom.strongfit.fragments.ChatFragment;
-import com.strom.strongfit.util.SlidingTabLayout;
+import com.strom.strongfit.utils.SessionManager;
+import com.strom.strongfit.utils.SlidingTabLayout;
 
 
 public class MainMedicoActivity extends ActionBarActivity {
@@ -22,11 +23,17 @@ public class MainMedicoActivity extends ActionBarActivity {
     private SlidingTabLayout slidingTabLayout;
     private String[] titles;
     private Fragment[] fragments;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_medico);
+
+        sessionManager = new SessionManager(this);
+        if(sessionManager.checkLogin()){
+            this.finish();
+        }
 
         setToolBar();
         setTabsAndPager();
@@ -83,10 +90,8 @@ public class MainMedicoActivity extends ActionBarActivity {
             return true;
         }else{
             if(id == R.id.action_cerrar){
-                Toast.makeText(this, "Cerrar", Toast.LENGTH_SHORT).show();
-                finish();
-                intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                sessionManager.logOutUser();
+                this.finish();
                 return true;
             }
         }

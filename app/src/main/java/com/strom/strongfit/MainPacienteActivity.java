@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.strom.strongfit.fragments.ArticulosFragment;
 import com.strom.strongfit.fragments.ChatFragment;
 import com.strom.strongfit.fragments.MainPacienteFragment;
+import com.strom.strongfit.utils.SessionManager;
 
 
 public class MainPacienteActivity extends ActionBarActivity implements ListView.OnItemClickListener {
@@ -30,13 +31,17 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
     Toolbar toolbar;
     private ArrayAdapter<String> drawer_adapter;
     private String[] list_titles;
-
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_paciente);
 
+        sessionManager = new SessionManager(this);
+        if(sessionManager.checkLogin()){
+            this.finish();
+        }
         setToolBar();
         drawer_list = (ListView) findViewById(R.id.drawer_list);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -83,10 +88,8 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
             return true;
         }else{
             if(id == R.id.action_cerrar){
-                Toast.makeText(this, "Cerrar", Toast.LENGTH_SHORT).show();
-                finish();
-                intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                sessionManager.logOutUser();
+                this.finish();
                 return true;
             }
         }

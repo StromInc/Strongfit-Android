@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.strom.strongfit.R;
 import com.strom.strongfit.adapters.CustomPagerAdapter;
-import com.strom.strongfit.util.SlidingTabLayout;
+import com.strom.strongfit.utils.SlidingTabLayout;
 
 /**
  * A simple {@link Fragment} subclass.

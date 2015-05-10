@@ -7,16 +7,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.strom.strongfit.utils.SessionManager;
+
 
 public class LoginActivity extends ActionBarActivity {
     private EditText input_email;
     private EditText input_password;
     private String password, email;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sessionManager = new SessionManager(this);
+        if(sessionManager.isLoggedIn()){
+           sessionManager.checkUserType();
+            this.finish();
+        }
         input_email = (EditText) findViewById(R.id.input_email);
         input_password = (EditText) findViewById(R.id.input_password);
     }
@@ -27,16 +36,16 @@ public class LoginActivity extends ActionBarActivity {
         Intent intent;
 
         if (email.equals("paciente@gmail.com") && password.equals("123")) {
-            Toast.makeText(this, "Entrar", Toast.LENGTH_SHORT).show(); //Un pequeño mensaje
-            finish();
+            sessionManager.createLogInSession("paciente@gmail.com", "Moy", "paciente");
             intent = new Intent(this, MainPacienteActivity.class);
             startActivity(intent);
-
+            this.finish();
         }else {
             if (email.equals("medico@gmail.com") && password.equals("123")) {
-                finish(); //Esto cierra al actividad actual
+                sessionManager.createLogInSession("medico@gmail.com", "Moy", "medico");
                 intent = new Intent(this, MainMedicoActivity.class); //Con esto abrimos una nueva actividad
                 startActivity(intent);
+                this.finish();
             }else{
                 Toast.makeText(this, "paciente@gmail.com o medico@gmail.com y 123", Toast.LENGTH_SHORT).show();
             }
