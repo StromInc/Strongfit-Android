@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -13,10 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.strom.strongfit.adapters.CustomRecyclerViewAdapter;
 import com.strom.strongfit.fragments.ArticulosFragment;
 import com.strom.strongfit.fragments.ChatFragment;
 import com.strom.strongfit.fragments.MainPacienteFragment;
@@ -26,10 +27,11 @@ import com.strom.strongfit.utils.SessionManager;
 public class MainPacienteActivity extends ActionBarActivity implements ListView.OnItemClickListener {
 
     private DrawerLayout drawerLayout;
-    private ListView drawer_list;
+    private RecyclerView recyclerView; //Nuestro recycler
     private ActionBarDrawerToggle drawer_toggle;
+    RecyclerView.LayoutManager mLayoutManager;
     Toolbar toolbar;
-    private ArrayAdapter<String> drawer_adapter;
+    private RecyclerView.Adapter drawerAdapter;
     private String[] list_titles;
     private SessionManager sessionManager;
 
@@ -43,14 +45,15 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
             this.finish();
         }
         setToolBar();
-        drawer_list = (ListView) findViewById(R.id.drawer_list);
+        recyclerView = (RecyclerView) findViewById(R.id.drawer_list);
+        mLayoutManager = new LinearLayoutManager(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         list_titles = getResources().getStringArray(R.array.list_titles);
 
-        drawer_adapter = new ArrayAdapter<String>(this, R.layout.drawer_list_item, list_titles);
-        drawer_list.setAdapter(drawer_adapter);
-        drawer_list.setOnItemClickListener(this);
+        drawerAdapter = new CustomRecyclerViewAdapter(list_titles, "Moises", "70 kg");
+        recyclerView.setAdapter(drawerAdapter);
+        recyclerView.setLayoutManager(mLayoutManager);
 
         drawer_toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_open);
         drawerLayout.setDrawerListener(drawer_toggle);
@@ -130,9 +133,9 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
                 .replace(R.id.frame_content, frag)
                 .commit();
 
-        drawer_list.setItemChecked(position, true);
-        setTitle(drawer_list.getItemAtPosition(position).toString());
-        drawerLayout.closeDrawer(drawer_list);
+        recyclerView.setItemChecked(position, true);
+        setTitle(recyclerView.getItemAtPosition(position).toString());
+        drawerLayout.closeDrawer(recyclerView);
     }
 
     @Override
