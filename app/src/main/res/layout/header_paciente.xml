@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nombre_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textColor="#ffffff"
+            android:text="Moises"
+            android:textSize="14sp"
+            android:textStyle="bold"
+
+            />
+
+        <TextView
+            android:id="@+id/peso_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
+            android:text="70kg"
+            android:textSize="14sp"
+            android:textStyle="normal"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
