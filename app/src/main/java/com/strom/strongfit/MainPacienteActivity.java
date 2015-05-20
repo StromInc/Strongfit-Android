@@ -133,9 +133,9 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
                 .replace(R.id.frame_content, frag)
                 .commit();
 
-        drawer_list.setItemChecked(position, true);
-        setTitle(drawer_list.getItemAtPosition(position).toString());
-        drawerLayout.closeDrawer(drawer_list);
+        recyclerView.setItemChecked(position, true);
+        setTitle(recyclerView.getItemAtPosition(position).toString());
+        drawerLayout.closeDrawer(recyclerView);
     }
 
     @Override
