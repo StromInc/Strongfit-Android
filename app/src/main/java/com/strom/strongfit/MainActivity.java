@@ -40,9 +40,9 @@ public class MainActivity extends ActionBarActivity implements ListView.OnItemCl
     private final static String PESO = "70 kg";
     private int profileImage;
     //Los iconos que vamos a usar
-    private final static int ICONOS[] = {R.drawable.ic_home_grey600_48dp, R.drawable.ic_local_restaurant_grey600_48dp,
-            R.drawable.ic_forum_grey600_48dp, R.drawable.ic_poll_grey600_48dp, R.drawable.ic_comment_grey600_48dp,
-            R.drawable.ic_close_grey600_48dp};
+    private final static int ICONOS[] = {R.drawable.ic_home, R.drawable.ic_food,
+            R.drawable.ic_chat, R.drawable.ic_dietas, R.drawable.ic_articulos,
+            R.drawable.ic_close};
 
     private final static String TAG = MainActivity.class.getSimpleName(); //Para los logs
 
