@@ -12,16 +12,19 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.strom.strongfit.adapters.CustomRecyclerViewAdapter;
 import com.strom.strongfit.fragments.ArticulosFragment;
 import com.strom.strongfit.fragments.ChatFragment;
-import com.strom.strongfit.fragments.MainPacienteFragment;
+import com.strom.strongfit.fragments.MainFragment;
 import com.strom.strongfit.utils.SessionManager;
 
 
@@ -63,7 +66,13 @@ public class MainActivity extends ActionBarActivity implements ListView.OnItemCl
         recyclerView = (RecyclerView) findViewById(R.id.drawer_list);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mLayoutManager = new LinearLayoutManager(this);
-        drawerAdapter = new CustomRecyclerViewAdapter(list_titles, NOMBRE, PESO, profileImage, ICONOS);
+        drawerAdapter = new CustomRecyclerViewAdapter(list_titles, NOMBRE, PESO, profileImage, ICONOS, this);
+        final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+        });
 
         recyclerView.setHasFixedSize(true);
 
@@ -71,7 +80,24 @@ public class MainActivity extends ActionBarActivity implements ListView.OnItemCl
 
         recyclerView.setAdapter(drawerAdapter);
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if(child != null && mGestureDetector.onTouchEvent(motionEvent)){
+                    drawerLayout.closeDrawers();
+                    Toast.makeText(MainActivity.this, "Seleccionado: " + recyclerView.getChildPosition(child), Toast.LENGTH_SHORT).show();
+                    setSelectItem(recyclerView.getChildPosition(child));
+                    return true;
+                }
+                return false;
+            }
 
+            @Override
+            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+
+            }
+        });
         drawer_toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,
                 R.string.drawer_close); //Esto agrega un icono a la barra para que se muestre el menu
         drawerLayout.setDrawerListener(drawer_toggle); //Detectamos los eventos
@@ -134,7 +160,7 @@ public class MainActivity extends ActionBarActivity implements ListView.OnItemCl
 
         switch (position) {
             case 0:
-                frag = new MainPacienteFragment();
+                frag = new MainFragment();
                 break;
             case 1:
                 frag = new ArticulosFragment();
@@ -142,8 +168,20 @@ public class MainActivity extends ActionBarActivity implements ListView.OnItemCl
             case 2:
                 frag = new ChatFragment();
                 break;
+            case 3:
+                frag = new MainFragment();
+                break;
+            case 4:
+                frag = new ArticulosFragment();
+                break;
+            case 5:
+                frag = new MainFragment();
+                break;
+            case 6:
+                frag = new ChatFragment();
+                break;
             default:
-                frag = new MainPacienteFragment();
+                frag = new MainFragment();
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
