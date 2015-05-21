@@ -27,9 +27,12 @@
         <item>Mis datos</item>
     </array>
     <array name="list_titles">
-        <item>Conteo calorico</item>
-        <item>Articulos</item>
+        <item>Inicio</item>
+        <item>Alimentos</item>
         <item>Chat</item>
+        <item>Dietas</item>
+        <item>Articulos</item>
+        <item>Salir</item>
     </array>
 
     <string name="drawer_open">Abrir</string>

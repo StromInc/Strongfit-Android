@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,14 +27,23 @@ import com.strom.strongfit.utils.SessionManager;
 
 public class MainPacienteActivity extends ActionBarActivity implements ListView.OnItemClickListener {
 
-    private DrawerLayout drawerLayout;
-    private RecyclerView recyclerView; //Nuestro recycler
+    private DrawerLayout drawerLayout; //Lo necesitamos para poner un menu lateral
+    private RecyclerView recyclerView; //Nuestro recycler(Es nuestro menu)
     private ActionBarDrawerToggle drawer_toggle;
-    RecyclerView.LayoutManager mLayoutManager;
-    Toolbar toolbar;
+    private RecyclerView.LayoutManager mLayoutManager;
+    Toolbar toolbar;  //La barrita
     private RecyclerView.Adapter drawerAdapter;
-    private String[] list_titles;
-    private SessionManager sessionManager;
+    private String[] list_titles; //Los titulos del menu
+    private SessionManager sessionManager; //Para las sesiones
+    //Estos valores son de prueba
+    private final static String NOMBRE = "Moises de Pazzi";
+    private final static String PESO = "70 kg";
+    private int profileImage;
+    private final static int ICONOS[] = {R.drawable.ic_home_grey600_48dp, R.drawable.ic_local_restaurant_grey600_48dp,
+            R.drawable.ic_forum_grey600_48dp, R.drawable.ic_poll_grey600_48dp, R.drawable.ic_comment_grey600_48dp,
+            R.drawable.ic_close_grey600_48dp};
+
+    private final static String TAG = MainPacienteActivity.class.getSimpleName(); //Para los logs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +51,30 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
         setContentView(R.layout.activity_main_paciente);
 
         sessionManager = new SessionManager(this);
-        if(sessionManager.checkLogin()){
+        if(sessionManager.checkLogin()){ //Checa si ya hay una sesion, si no la hay manda al login
             this.finish();
         }
-        setToolBar();
-        recyclerView = (RecyclerView) findViewById(R.id.drawer_list);
-        mLayoutManager = new LinearLayoutManager(this);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
+        setToolBar(); //Crea la toolbar, es un metodo que esta abajo
+        //Se necesitan inicializar todos nuestros elementos
         list_titles = getResources().getStringArray(R.array.list_titles);
+        profileImage = R.drawable.dog;
 
-        drawerAdapter = new CustomRecyclerViewAdapter(list_titles, "Moises", "70 kg");
+        recyclerView = (RecyclerView) findViewById(R.id.drawer_list);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mLayoutManager = new LinearLayoutManager(this);
+        drawerAdapter = new CustomRecyclerViewAdapter(list_titles, NOMBRE, PESO, profileImage, ICONOS);
+
+        recyclerView.setHasFixedSize(true);
+
+        Log.e(TAG, "valor " + profileImage); //Esto es como un System.out.print()
+
         recyclerView.setAdapter(drawerAdapter);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        drawer_toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_open);
-        drawerLayout.setDrawerListener(drawer_toggle);
-        selectItem(0);
+        drawer_toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,
+                R.string.drawer_close); //Esto agrega un icono a la barra para que se muestre el menu
+        drawerLayout.setDrawerListener(drawer_toggle); //Detectamos los eventos
+        setSelectItem(0); //Esto pone la pagina que se va a ver
     }
 
     public void setToolBar(){
@@ -111,7 +128,7 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
         super.onConfigurationChanged(newConfig);
         drawer_toggle.onConfigurationChanged(newConfig);
     }
-    public void selectItem(int position){
+    public void setSelectItem(int position){
         Fragment frag;
 
         switch (position) {
@@ -133,13 +150,13 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
                 .replace(R.id.frame_content, frag)
                 .commit();
 
-        recyclerView.setItemChecked(position, true);
-        setTitle(recyclerView.getItemAtPosition(position).toString());
+        //recyclerView.setItemChecked(position, true);
+        //setTitle(recyclerView.getItemAtPosition(position).toString());
         drawerLayout.closeDrawer(recyclerView);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        selectItem(i);
+        setSelectItem(i);
     }
 }
