@@ -37,18 +37,11 @@ public class LoginActivity extends ActionBarActivity {
 
         if (email.equals("paciente@gmail.com") && password.equals("123")) {
             sessionManager.createLogInSession("paciente@gmail.com", "Moy", "paciente");
-            intent = new Intent(this, MainPacienteActivity.class);
+            intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             this.finish();
         }else {
-            if (email.equals("medico@gmail.com") && password.equals("123")) {
-                sessionManager.createLogInSession("medico@gmail.com", "Moy", "medico");
-                intent = new Intent(this, MainMedicoActivity.class); //Con esto abrimos una nueva actividad
-                startActivity(intent);
-                this.finish();
-            }else{
-                Toast.makeText(this, "paciente@gmail.com o medico@gmail.com y 123", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(this, "paciente@gmail.com o medico@gmail.com y 123", Toast.LENGTH_SHORT).show();
         }
     }
     public void onClickRegistro(View view){

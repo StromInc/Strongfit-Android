@@ -25,7 +25,7 @@ import com.strom.strongfit.fragments.MainPacienteFragment;
 import com.strom.strongfit.utils.SessionManager;
 
 
-public class MainPacienteActivity extends ActionBarActivity implements ListView.OnItemClickListener {
+public class MainActivity extends ActionBarActivity implements ListView.OnItemClickListener {
 
     private DrawerLayout drawerLayout; //Lo necesitamos para poner un menu lateral
     private RecyclerView recyclerView; //Nuestro recycler(Es nuestro menu)
@@ -44,12 +44,12 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
             R.drawable.ic_forum_grey600_48dp, R.drawable.ic_poll_grey600_48dp, R.drawable.ic_comment_grey600_48dp,
             R.drawable.ic_close_grey600_48dp};
 
-    private final static String TAG = MainPacienteActivity.class.getSimpleName(); //Para los logs
+    private final static String TAG = MainActivity.class.getSimpleName(); //Para los logs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_paciente);
+        setContentView(R.layout.activity_main);
 
         sessionManager = new SessionManager(this);
         if(sessionManager.checkLogin()){ //Checa si ya hay una sesion, si no la hay manda al login

@@ -5,8 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.strom.strongfit.LoginActivity;
-import com.strom.strongfit.MainMedicoActivity;
-import com.strom.strongfit.MainPacienteActivity;
+import com.strom.strongfit.MainActivity;
 
 public class SessionManager {
     SharedPreferences preferencias;
@@ -60,17 +59,10 @@ public class SessionManager {
         String tipoUsuario = preferencias.getString(KEY_USER_TYPE, "paciente");
         Intent intent;
         if(tipoUsuario.equals("paciente")){
-            intent = new Intent(contexto, MainPacienteActivity.class);
+            intent = new Intent(contexto, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             contexto.startActivity(intent);
-        }else{
-            if(tipoUsuario.equals("medico")){
-                intent = new Intent(contexto, MainMedicoActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                contexto.startActivity(intent);
-            }
         }
     }
 }
