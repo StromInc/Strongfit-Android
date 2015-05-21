@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.strom.strongfit.fragments.MainPacienteFragment">
+    tools:context="com.strom.strongfit.fragments.MainFragment">
 
     <com.strom.strongfit.utils.SlidingTabLayout
         android:id="@+id/sliding_tabs"

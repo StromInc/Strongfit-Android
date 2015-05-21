@@ -95,6 +95,8 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         public ViewHolder(View itemView, int viewType, Context c) {
             super(itemView);
             this.contexto = c;
+            itemView.setClickable(true);
+            itemView.setOnClickListener(this);
             if(viewType == TYPE_ITEM){
                 drawer_item_text = (TextView) itemView.findViewById(R.id.drawer_item_text);
                 drawer_item_icon = (ImageView) itemView.findViewById(R.id.drawer_item_icon);

@@ -16,15 +16,15 @@ import com.strom.strongfit.utils.SlidingTabLayout;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainPacienteFragment extends Fragment {
+public class MainFragment extends Fragment {
     private SlidingTabLayout mSilidingTabLayout;
     private CustomPagerAdapter customPagerAdapter;
-    private static final String TAG = MainPacienteFragment.class.getSimpleName();
+    private static final String TAG = MainFragment.class.getSimpleName();
     private ViewPager viewPager;
     private Fragment[] fragments;
     private String[] titles;
 
-    public MainPacienteFragment() {
+    public MainFragment() {
         // Required empty public constructor
     }
 
