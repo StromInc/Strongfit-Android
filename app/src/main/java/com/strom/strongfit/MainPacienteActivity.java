@@ -39,6 +39,7 @@ public class MainPacienteActivity extends ActionBarActivity implements ListView.
     private final static String NOMBRE = "Moises de Pazzi";
     private final static String PESO = "70 kg";
     private int profileImage;
+    //Los iconos que vamos a usar
     private final static int ICONOS[] = {R.drawable.ic_home_grey600_48dp, R.drawable.ic_local_restaurant_grey600_48dp,
             R.drawable.ic_forum_grey600_48dp, R.drawable.ic_poll_grey600_48dp, R.drawable.ic_comment_grey600_48dp,
             R.drawable.ic_close_grey600_48dp};
