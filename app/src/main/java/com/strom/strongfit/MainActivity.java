@@ -28,7 +28,7 @@ import com.strom.strongfit.fragments.MainFragment;
 import com.strom.strongfit.utils.SessionManager;
 
 
-public class MainActivity extends ActionBarActivity implements ListView.OnItemClickListener {
+public class MainActivity extends ActionBarActivity{
 
     private DrawerLayout drawerLayout; //Lo necesitamos para poner un menu lateral
     private RecyclerView recyclerView; //Nuestro recycler(Es nuestro menu)
@@ -192,10 +192,5 @@ public class MainActivity extends ActionBarActivity implements ListView.OnItemCl
         //recyclerView.setItemChecked(position, true);
         //setTitle(recyclerView.getItemAtPosition(position).toString());
         drawerLayout.closeDrawer(recyclerView);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        setSelectItem(i);
     }
 }
