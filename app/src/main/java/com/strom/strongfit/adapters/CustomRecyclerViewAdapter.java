@@ -1,14 +1,11 @@
 package com.strom.strongfit.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.strom.strongfit.R;
 
@@ -42,7 +39,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
 
             return vhItem;
         } else if (i == TYPE_HEADER) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.header_paciente, viewGroup, false); //Infla el header
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.header, viewGroup, false); //Infla el header
             ViewHolder vhHeader = new ViewHolder(view, i);
 
             return vhHeader;

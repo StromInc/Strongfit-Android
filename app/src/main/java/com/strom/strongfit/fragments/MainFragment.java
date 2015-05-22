@@ -35,7 +35,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d(TAG, "onCreateView");
 
-        View view = inflater.inflate(R.layout.fragment_main_paciente, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.view_pager_paciente);
         mSilidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         return view;
