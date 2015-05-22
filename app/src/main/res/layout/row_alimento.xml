@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/card_view"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="0dp"
+    android:layout_marginRight="1dp"
+    android:layout_marginLeft="1dp"
+    card_view:cardCornerRadius="2dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/alimento_id"
+            android:text="@string/text_id"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/alimento_nombre"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/text_alimento"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/alimento_calorias"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/text_calorias"
+            android:layout_below="@+id/alimento_nombre"
+            android:layout_toRightOf="@+id/alimento_id"
+            android:layout_toEndOf="@+id/alimento_id" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

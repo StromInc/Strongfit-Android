@@ -25,27 +25,25 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
     static final String TAG = CustomRecyclerViewAdapter.class.getSimpleName();
-    private Context _context;
     //Primero recivimos los datos
-    public CustomRecyclerViewAdapter(String[] titles, String nombre, String peso, int perfilImagen, int[] iconos, Context mContext) {
+    public CustomRecyclerViewAdapter(String[] titles, String nombre, String peso, int perfilImagen, int[] iconos) {
         this.titles = titles;
         this.nombre = nombre;
         this.peso = peso;
         this.perfilImagen = perfilImagen;
         this.iconos = iconos;
-        this._context = mContext;
     }
     //Este metodo se ejecuta para crear la vista
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         if (i == TYPE_ITEM) {
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.drawer_list_item, viewGroup, false); //Infla la lista
-            ViewHolder vhItem = new ViewHolder(view, i, _context); //Le pasamos los valores a nuestro Holder (la vista y el tipo)
+            ViewHolder vhItem = new ViewHolder(view, i); //Le pasamos los valores a nuestro Holder (la vista y el tipo)
 
             return vhItem;
         } else if (i == TYPE_HEADER) {
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.header_paciente, viewGroup, false); //Infla el header
-            ViewHolder vhHeader = new ViewHolder(view, i, _context);
+            ViewHolder vhHeader = new ViewHolder(view, i);
 
             return vhHeader;
         }
@@ -83,20 +81,16 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         return position == TYPE_HEADER;
     }
     //Usamos un Holder para solo inicializar una vez cada elemento
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         int holderID;
         private TextView nombre_text;
         private TextView peso_text;
         private TextView drawer_item_text;
         private ImageView profile_image;
         private ImageView drawer_item_icon;
-        private Context contexto;
 
-        public ViewHolder(View itemView, int viewType, Context c) {
+        public ViewHolder(View itemView, int viewType) {
             super(itemView);
-            this.contexto = c;
-            itemView.setClickable(true);
-            itemView.setOnClickListener(this);
             if(viewType == TYPE_ITEM){
                 drawer_item_text = (TextView) itemView.findViewById(R.id.drawer_item_text);
                 drawer_item_icon = (ImageView) itemView.findViewById(R.id.drawer_item_icon);
@@ -107,11 +101,6 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
                 profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
                 holderID = 0;
             }
-        }
-
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(contexto, "Apretaste: " + getPosition(), Toast.LENGTH_SHORT).show();
         }
     }
 }
