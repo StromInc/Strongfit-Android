@@ -1,19 +1,21 @@
 package com.strom.strongfit.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.strom.strongfit.AlimentoActivity;
 import com.strom.strongfit.R;
 import com.strom.strongfit.adapters.AlimentosAdapter;
 import com.strom.strongfit.models.Alimento;
+import com.strom.strongfit.utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
@@ -60,5 +62,13 @@ public class AlimentosFragment extends Fragment {
         mRecyclerView.setAdapter(alimentosAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity().getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), AlimentoActivity.class);
+                startActivity(intent);
+            }
+        }));
     }
+
 }

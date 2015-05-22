@@ -7,6 +7,42 @@ public class Alimento {
     private int alimentoID;
     private String name;
     private String calories;
+    private String lipidos;
+    private String carbohidratos;
+    private String proteinas;
+    private int alimentoTipo;
+
+    public String getLipidos() {
+        return lipidos;
+    }
+
+    public void setLipidos(String lipidos) {
+        this.lipidos = lipidos;
+    }
+
+    public String getCarbohidratos() {
+        return carbohidratos;
+    }
+
+    public void setCarbohidratos(String carbohidratos) {
+        this.carbohidratos = carbohidratos;
+    }
+
+    public String getProteinas() {
+        return proteinas;
+    }
+
+    public void setProteinas(String proteinas) {
+        this.proteinas = proteinas;
+    }
+
+    public int getAlimentoTipo() {
+        return alimentoTipo;
+    }
+
+    public void setAlimentoTipo(int alimentoTipo) {
+        this.alimentoTipo = alimentoTipo;
+    }
 
     public int getAlimentoID() {
         return alimentoID;
