@@ -37,6 +37,7 @@
         <activity
             android:name=".AlimentoActivity"
             android:label="@string/title_activity_alimento" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity" />
         </activity>
     </application>
 
