@@ -1,11 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.strom.strongfit.SearchAlimentosActivity">
+      xmlns:appcompat="http://schemas.android.com/apk/res-auto"
+      xmlns:app="http://schemas.android.com/tools">
     <item
-        android:id="@+id/action_search"
-        android:title="@string/search"
-        android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="always"
-        android:actionViewClass="android.support.v7.widget.SearchView" />
+        android:id="@+id/menu_search"
+        android:title="@string/search_label"
+        appcompat:actionViewClass="android.support.v7.widget.SearchView"
+        appcompat:showAsAction="always"/>
+
 </menu>

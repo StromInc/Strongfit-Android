@@ -23,9 +23,6 @@
     <string name="drawer_open">Abrir</string>
     <string name="drawer_close">Cerrar</string>
 
-    <string name="consumo_fragment">Consumo</string>
-    <string name="datos_fragment">Mis datos</string>
-
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_calorias">90 kcal/100g</string>
@@ -33,11 +30,10 @@
     <string name="text_id">El id</string>
     <string name="title_activity_alimento">AlimentoActivity</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="action_add">Add</string>
     <string name="image_description">Imagen de fondo</string>
-    <string name="title_activity_search_alimentos">Buscar alimentos</string>
-    <string name="search">Buscar Alimento</string>
+    <string name="title_activity_resultados_busqueda">Resultados de la busqueda</string>
+    <string name="search_hint">Buscar alimentos</string>
+    <string name="search_label">Todos los alimentos</string>
 
 </resources>

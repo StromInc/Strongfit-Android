@@ -4,6 +4,6 @@
     tools:context="com.strom.strongfit.fragments.ConsumoFragment">
 
     <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/consumo_fragment" />
+        android:text="Consumo" />
 
 </FrameLayout>

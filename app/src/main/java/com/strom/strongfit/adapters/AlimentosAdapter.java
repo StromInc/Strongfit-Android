@@ -36,10 +36,9 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Alimento alimento = alimentos.get(position);
-        Log.d(TAG, "-----------Entro al Bind------------");
         Log.d(TAG, "Nombre: " + alimento.getName());
         holder.alimento_nombre.setText(alimento.getName());
-        holder.alimento_calorias.setText(alimento.getCalories());
+        holder.alimento_calorias.setText(alimento.getCalories() + "kcal");
         holder.alimento_id.setText(String.valueOf(alimento.getAlimentoID()));
     }
 

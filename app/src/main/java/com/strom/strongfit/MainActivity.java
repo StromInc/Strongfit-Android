@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mNavItemId = R.id.home_menu;
         } else {
             mNavItemId = savedInstanceState.getInt(NAV_ITEM_ID);
+
         }
+        Log.i(TAG, "El valor es: " + mNavItemId);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
             case R.id.alimentos_menu:
                 Toast.makeText(getApplicationContext(), "Alimentos", Toast.LENGTH_SHORT).show();
-                mNavItemId = R.id.alimentos_menu;
+                mNavItemId = R.id.home_menu;
                 Intent intent = new Intent(this, SearchAlimentosActivity.class);
                 startActivity(intent);
                 return true;
@@ -111,5 +113,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(NAV_ITEM_ID, mNavItemId);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "el valor onresume es: " + mNavItemId);
+        navigationView.getMenu().findItem(mNavItemId).setChecked(true);
     }
 }
