@@ -16,25 +16,27 @@ public class ConectarHTTP {
     HttpURLConnection httpConnection = null;
     BufferedReader bufferedReader = null;
     StringBuilder response = null;
+    private static final String TAG = ConectarHTTP.class.getSimpleName();
 
-    public String iniciarSesion(){
+    public String iniciarSesion(String correo, String contra){
         try {
-            Log.d(TAG, "Entro al try");
+            String postParameters = "correo="+correo+"&contra="+contra;
+            Log.i(TAG, "ParametrosPost: " + postParameters);
             //No olviden cambiar la ip
             URL url = new URL("http://192.168.1.141:8080/StrongFit/sLoginAndroid");
             httpConnection = (HttpURLConnection) url.openConnection();
             httpConnection.setRequestMethod("POST");
             httpConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpConnection.setDoOutput(true);
-            String postParameters = "correo=value1&contra=value2";
+
             httpConnection.setFixedLengthStreamingMode(
                     postParameters.getBytes().length);
+
             PrintWriter out = new PrintWriter(httpConnection.getOutputStream());
             out.print(postParameters);
             out.close();
-            int responseCode = httpConnection.getResponseCode();
-            Log.w(TAG, String.valueOf(responseCode));
 
+            Log.w(TAG, "Codigo de respuesta: " + httpConnection.getResponseCode());
 
             bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
             String linea;
@@ -42,10 +44,11 @@ public class ConectarHTTP {
             while((linea = bufferedReader.readLine()) != null){
                 response.append(linea);
             }
-            Log.i(TAG, "Valor: " + response.toString());
+            Log.i(TAG, "La respuesta del servidor: " + response.toString());
+            return response.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG, e.getMessage());
+            return "Error 90";
         }finally {
             if (httpConnection != null) {
                 httpConnection.disconnect();

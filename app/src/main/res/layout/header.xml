@@ -42,7 +42,7 @@
             android:textColor="#ffffff"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
-            android:text="70kg"
+            android:text="Peso: 70kg"
             android:textSize="14sp"
             android:textStyle="normal"/>
 

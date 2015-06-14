@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.strom.strongfit.LoginActivity;
-import com.strom.strongfit.MainActivity;
 
 public class SessionManager {
     SharedPreferences preferencias;
@@ -16,7 +15,6 @@ public class SessionManager {
     private static final String IS_LOGIN = "isLoggedIn";
     static final String KEY_NAME = "name";
     static final String KEY_EMAIL = "email";
-    static final String KEY_USER_TYPE = "userType";
 
     public SessionManager(Context context) {
         this.contexto = context;
@@ -24,11 +22,10 @@ public class SessionManager {
         editor = preferencias.edit();
     }
 
-    public void createLogInSession(String email, String name, String userType){
+    public void createLogInSession(String email, String name){
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_NAME, name);
-        editor.putString(KEY_USER_TYPE, userType);
         editor.commit();
     }
 
@@ -54,15 +51,5 @@ public class SessionManager {
 
     public boolean isLoggedIn(){
         return preferencias.getBoolean(IS_LOGIN, false);
-    }
-    public void checkUserType(){
-        String tipoUsuario = preferencias.getString(KEY_USER_TYPE, "paciente");
-        Intent intent;
-        if(tipoUsuario.equals("paciente")){
-            intent = new Intent(contexto, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            contexto.startActivity(intent);
-        }
     }
 }

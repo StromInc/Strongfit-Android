@@ -16,20 +16,24 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".RegistroActivity"
-            android:label="@string/title_activity_registro" >
+            android:label="@string/title_activity_registro"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ProfileActivity"
-            android:label="@string/title_activity_profile" >
+            android:label="@string/title_activity_profile"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/NoActionBar" >
+            android:theme="@style/NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +42,8 @@
         </activity>
         <activity
             android:name=".AlimentoActivity"
-            android:label="@string/title_activity_alimento" >
+            android:label="@string/title_activity_alimento"
+            android:screenOrientation="portrait">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity" />
         </activity>
     </application>

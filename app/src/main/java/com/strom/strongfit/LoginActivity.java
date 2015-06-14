@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -14,24 +14,12 @@ import android.widget.Toast;
 import com.strom.strongfit.utils.ConectarHTTP;
 import com.strom.strongfit.utils.SessionManager;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class LoginActivity extends ActionBarActivity {
     private EditText input_email;
     private EditText input_password;
-    private String password, email;
     private SessionManager sessionManager;
-    HttpURLConnection httpConnection = null;
-    BufferedReader bufferedReader = null;
-    StringBuilder response = null;
+    private ConectarHTTP conectarHTTP;
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     @Override
@@ -41,52 +29,50 @@ public class LoginActivity extends ActionBarActivity {
 
         sessionManager = new SessionManager(this);
         if(sessionManager.isLoggedIn()){
-           sessionManager.checkUserType();
+            Intent i = new Intent(this, MainActivity.class);
             this.finish();
+            startActivity(i);
         }
         input_email = (EditText) findViewById(R.id.input_email);
         input_password = (EditText) findViewById(R.id.input_password);
-        ConectarHTTP conectarHTTP = new ConectarHTTP();
+        conectarHTTP = new ConectarHTTP();
     }
 
     public void onClickEntrar(View view) {
-        email = input_email.getText().toString();
-        password = input_password.getText().toString();
-        Intent intent;
-        new IniciarSesionTask().execute();
-    }
-    public void onClickRegistro(View view){
-        Intent intent = new Intent(this, RegistroActivity.class);
-        startActivity(intent);
+        String email = input_email.getText().toString();
+        String password = input_password.getText().toString();
+        String[] arrayDatos = new String[]{email, password};
+        new IniciarSesionTask().execute(arrayDatos);
     }
 
-    public class IniciarSesionTask extends AsyncTask<Object, Void, String> {
+    public class IniciarSesionTask extends AsyncTask<String, Void, String> {
 
         @Override
-        protected String doInBackground(Object... params) {
+        protected String doInBackground(String... params) {
             ConnectivityManager connMgr = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
-                String respuesta = conectarHTTP.iniciarSesion();
+                String respuesta = conectarHTTP.iniciarSesion(params[0], params[1]);
                 return respuesta;
             } else {
                 Log.e(TAG, "No hay red");
             }
-            return "No se encontraron datos";
+            return "No hay red";
         }
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-            if (s.equals("entra")) {
-                sessionManager.createLogInSession("paciente@gmail.com", "Moy", "paciente");
-                intent = new Intent(this, MainActivity.class);
+            Log.i(TAG, s);
+            //s.equals("entra")
+            if (true) {
+                Intent intent;
+                sessionManager.createLogInSession("paciente@gmail.com", "Moy");
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                finish();
                 startActivity(intent);
-                this.finish();
             }else {
-                Toast.makeText(this, "paciente@gmail.com o medico@gmail.com y 123", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 }

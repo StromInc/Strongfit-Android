@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/alimento_calorias"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary "
             android:text="@string/text_calorias"
             android:layout_below="@+id/alimento_nombre"
             android:layout_toRightOf="@+id/alimento_id"

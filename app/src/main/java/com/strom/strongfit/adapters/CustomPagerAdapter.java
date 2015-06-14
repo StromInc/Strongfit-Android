@@ -4,9 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.strom.strongfit.fragments.ArticulosFragment;
-import com.strom.strongfit.fragments.ChatFragment;
-
 /**
  * Created by USER on 27/03/2015.
  */
