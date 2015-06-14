@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Informacion Nutrimental"/>
+            android:text="Informacion Nutrimental (100g)"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,37 +34,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_alimentoTipo"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="10dp"
-            android:text="Tipo de Alimento"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/text_alimentoCalorias"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="Calorias:"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/text_alimentoLipidos"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="Lipidos:"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/text_alimentoCarbohidratos"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="Carbohidratos:"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/text_alimentoProteinas"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="Proteinas:"/>
 
     </LinearLayout>

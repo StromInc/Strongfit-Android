@@ -1,29 +1,50 @@
 package com.strom.strongfit;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class AlimentoActivity extends ActionBarActivity {
     Toolbar toolbar;  //La barrita
+    private TextView textAlimentoID, textCalorias, textLipidos, textProteinas, textCarbohidratos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alimento);
+
         setToolBar();
-        setTitle("Nombre del Alimento");
+        Bundle bundle = this.getIntent().getExtras();
+        String nombreAlimento = bundle.getString("nombreAlimento");
+        int idAlimento = bundle.getInt("idAlimento", 0);
+        float calorias = bundle.getFloat("calorias", 0);
+        float carbohidratos = bundle.getFloat("carbohidratos", 0);
+        float lipidos = bundle.getFloat("lipidos", 0);
+        float proteinas = bundle.getFloat("proteinas", 0);
+        setTitle(nombreAlimento);
+
+        textAlimentoID = (TextView) findViewById(R.id.text_alimentoID);
+        textCalorias = (TextView) findViewById(R.id.text_alimentoCalorias);
+        textLipidos = (TextView) findViewById(R.id.text_alimentoLipidos);
+        textProteinas = (TextView) findViewById(R.id.text_alimentoProteinas);
+        textCarbohidratos = (TextView) findViewById(R.id.text_alimentoCarbohidratos);
+
+        textAlimentoID.setText(String.valueOf(idAlimento));
+        textCalorias.setText("Calorias: " + calorias + " kcal");
+        textLipidos.setText("Lipidos: " + lipidos);
+        textProteinas.setText("Proteinas: " + proteinas);
+        textCarbohidratos.setText("Carbohidratos: " + carbohidratos);
     }
 
     public void setToolBar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -44,9 +65,6 @@ public class AlimentoActivity extends ActionBarActivity {
         if (id == R.id.action_add) {
             Toast.makeText(this, "Atiendame", Toast.LENGTH_SHORT).show();
             return true;
-        }
-        if(id == android.R.id.home){
-            NavUtils.navigateUpFromSameTask(this);
         }
 
         return super.onOptionsItemSelected(item);

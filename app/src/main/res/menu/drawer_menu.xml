@@ -12,7 +12,7 @@
         <item
             android:id="@+id/perfil_menu"
             android:icon="@drawable/ic_perfil"
-            android:title="Perfil"/>
+            android:title="Mi Perfil"/>
         <item
             android:id="@+id/salir_menu"
             android:icon="@drawable/ic_close"

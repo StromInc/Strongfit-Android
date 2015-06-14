@@ -28,7 +28,7 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="text_calorias">90 kcal</string>
+    <string name="text_calorias">90 kcal/100g</string>
     <string name="text_alimento">Alimento</string>
     <string name="text_id">El id</string>
     <string name="title_activity_alimento">AlimentoActivity</string>
@@ -37,5 +37,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_add">Add</string>
     <string name="image_description">Imagen de fondo</string>
+    <string name="title_activity_search_alimentos">Buscar alimentos</string>
+    <string name="search">Buscar Alimento</string>
 
 </resources>

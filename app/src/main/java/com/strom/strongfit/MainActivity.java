@@ -8,11 +8,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.strom.strongfit.fragments.AlimentosFragment;
 import com.strom.strongfit.fragments.MainFragment;
 import com.strom.strongfit.utils.SessionManager;
 
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigate(mNavItemId);
     }
     public boolean navigate(int itemID){
+        Log.i(TAG, "el id " + itemID);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (itemID){
             case R.id.home_menu:
@@ -74,15 +75,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
             case R.id.alimentos_menu:
                 Toast.makeText(getApplicationContext(), "Alimentos", Toast.LENGTH_SHORT).show();
-                AlimentosFragment alimentosFragment = new AlimentosFragment();
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame_content, alimentosFragment);
-                fragmentTransaction.commit();
-                setTitle("Alimentos");
+                mNavItemId = R.id.alimentos_menu;
+                Intent intent = new Intent(this, SearchAlimentosActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.perfil_menu:
-                Intent intent = new Intent(this, ProfileActivity.class);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Mi Perfil", Toast.LENGTH_SHORT).show();
+                mNavItemId = R.id.home_menu;
+                Intent intent2 = new Intent(this, ProfileActivity.class);
+                startActivity(intent2);
+                return true;
             case R.id.salir_menu:
                 Toast.makeText(getApplicationContext(), "Salir", Toast.LENGTH_SHORT).show();
                 sessionManager.logOutUser();
