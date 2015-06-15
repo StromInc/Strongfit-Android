@@ -65,6 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Hoy"
+                android:id="@+id/btn_fecha"
+                android:onClick="onClickCambiarFecha"
                 android:textColor="@color/text_color"
                 android:layout_gravity="center_vertical"
                 android:background="@color/accent_color"/>

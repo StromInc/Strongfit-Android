@@ -47,7 +47,7 @@
 
         <activity
             android:name=".SearchAlimentosActivity"
-            android:label="@string/app_name"
+            android:label="@string/search_label"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.default_searchable"

@@ -2,18 +2,12 @@
     <string name="app_name">Strongfit</string>
 
     <string name="title_activity_login">Login</string>
-    <string name="title_activity_registro">Unete a Strongfit</string>
-    <string name="text_registrate">Registrate</string>
     <string name="title_activity_profile">Mi perfil</string>
-    <string name="articulos_fragment">Articulos</string>
-    <string name="chat_fragment">Chat</string>
 
     <string name="btn_entrar">Iniciar Sesión</string>
-    <string name="btn_listo">Listo</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_pass">Password</string>
-    <string name="hint_name">Nombre</string>
 
     <array name="titles_paciente">
         <item>Consumo</item>
@@ -31,16 +25,15 @@
     <string name="drawer_close">Cerrar</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_calorias">90 kcal/100g</string>
     <string name="text_alimento">Alimento</string>
     <string name="text_id">El id</string>
-    <string name="title_activity_alimento">AlimentoActivity</string>
+    <string name="title_activity_alimento">Alimento</string>
 
     <string name="action_add">Add</string>
     <string name="image_description">Imagen de fondo</string>
     <string name="title_activity_resultados_busqueda">Resultados de la busqueda</string>
     <string name="search_hint">Buscar alimentos</string>
-    <string name="search_label">Todos los alimentos</string>
+    <string name="search_label">Alimentos</string>
     <string name="alimento_title">Informacion Nutrimental</string>
 </resources>
