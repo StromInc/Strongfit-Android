@@ -30,6 +30,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter alimentosAdapter;
     ArrayList<Alimento> alimentosArrayList;
+    //private DBOperations dbOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

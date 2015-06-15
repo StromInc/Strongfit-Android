@@ -19,6 +19,13 @@
         <item>Consumo</item>
         <item>Mis datos</item>
     </array>
+    <array name="array_comidas">
+        <item>Desayuno</item>
+        <item>Colación 1</item>
+        <item>Comida</item>
+        <item>Colación 2</item>
+        <item>Cena</item>
+    </array>
 
     <string name="drawer_open">Abrir</string>
     <string name="drawer_close">Cerrar</string>
@@ -35,5 +42,5 @@
     <string name="title_activity_resultados_busqueda">Resultados de la busqueda</string>
     <string name="search_hint">Buscar alimentos</string>
     <string name="search_label">Todos los alimentos</string>
-
+    <string name="alimento_title">Informacion Nutrimental</string>
 </resources>
