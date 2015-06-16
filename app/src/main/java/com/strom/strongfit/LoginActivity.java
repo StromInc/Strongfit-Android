@@ -87,11 +87,11 @@ public class LoginActivity extends AppCompatActivity {
             if (networkInfo != null && networkInfo.isConnected()) {
                 String respuesta = conectarHTTP.iniciarSesion(params[0], params[1]);
                 //respuesta.equals("si")
-                if(true){
-                   // datosPaciente = conectarHTTP.getDatosPaciente(email, password);
-//                    nombre = datosPaciente.get("nombre");
-//                    idPaciente = Integer.parseInt(datosPaciente.get("idPaciente"));
-//                    avatar = datosPaciente.get("avatar");
+                if(respuesta.equals("si")){
+                    datosPaciente = conectarHTTP.getDatosPaciente(email, password);
+                    nombre = datosPaciente.get("nombre");
+                    idPaciente = Integer.parseInt(datosPaciente.get("idPaciente"));
+//                  avatar = datosPaciente.get("avatar");
 
                     listaAlimentos = conectarHTTP.getTodosAlimentos();
                     ContentValues values = new ContentValues();
@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
             Log.i(TAG, "La respuesta en onPostExecute fue: " + s);
             //s.equals("si")
-            if (true) {
+            if (s.equals("si")) {
                 Intent intent;
                 sessionManager.createLogInSession(email, nombre, idPaciente, avatar);
                 intent = new Intent(getApplicationContext(), MainActivity.class);

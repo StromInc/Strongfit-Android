@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class ConectarHTTP {
     //No olviden cambiar la ip
-    private static final String STRONGFITURL = "http://192.168.1.75:8080/StrongFit/";
+    private static final String STRONGFITURL = "http://192.168.1.120:8080/StrongFit/";
     private static final String TAG = ConectarHTTP.class.getSimpleName();
 
     public String iniciarSesion(String correo, String contra){
@@ -167,11 +167,11 @@ public class ConectarHTTP {
             String postParameters = "correo=" + correo + "&contra=" + contra;
             Log.i(TAG, "ParametrosPost: " + postParameters);
 
-            URL url = new URL(STRONGFITURL + "sLoginAndroid");
+            URL url = new URL(STRONGFITURL + "sGetDatospaciente");
             Log.i(TAG, "URL: " + url.toString());
             httpConnection = (HttpURLConnection) url.openConnection();
             httpConnection.setRequestMethod("POST");
-            httpConnection.setRequestProperty("Content-Type", "application/json");
+            httpConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpConnection.setDoOutput(true);
 
             httpConnection.setFixedLengthStreamingMode(
@@ -190,16 +190,9 @@ public class ConectarHTTP {
                 response.append(linea);
             }
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
-            JSONObject jsonResponse = new JSONObject(response.toString());
-            JSONArray jsonArray = jsonResponse.getJSONArray("paciente");
-            JSONObject pacienteJsonObject;
-            for (int i=0; i<jsonArray.length(); i++) {
-                pacienteJsonObject = (JSONObject) jsonArray.get(i);
-                datosPaciente.put("nombre", pacienteJsonObject.getString("nombre"));
-                datosPaciente.put("idPaciente", String.valueOf(pacienteJsonObject.getInt("idPaciente")));
-                datosPaciente.put("avatar", pacienteJsonObject.getString("avatar"));
-                Log.v(TAG, "Entro al for en getDatos paciente");
-            }
+            JSONObject pacienteJsonObject = new JSONObject(response.toString());
+            datosPaciente.put("nombre", pacienteJsonObject.getString("nombre"));
+            datosPaciente.put("idPaciente", pacienteJsonObject.getString("idPaciente"));
 
         } catch (Exception e) {
             e.printStackTrace();

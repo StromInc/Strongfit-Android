@@ -123,7 +123,7 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            comida = combo.getSelectedItemPosition();
+            comida = combo.getSelectedItemPosition() + 1;
             gramos = Float.parseFloat(cantidad.getText().toString());
             Log.i(TAG, "Datos a enviar comida: " + comida + " idAlimento " + idAlimento + " cantidad "
                     + gramos + " year: " + myYear + " mes " + mes + " dia " + dia);
