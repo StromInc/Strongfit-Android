@@ -11,9 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.strom.strongfit.fragments.MainFragment;
+import com.strom.strongfit.utils.BitmapManager;
 import com.strom.strongfit.utils.SessionManager;
 
 
@@ -27,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int mNavItemId;
     private static final String NAV_ITEM_ID = "navItemId";
     private final static String TAG = MainActivity.class.getSimpleName(); //Para los logs
+    private String nombre = "";
+    private String correo = "";
+    private String avatar = "";
+    private static ImageView imagenAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +51,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mNavItemId = savedInstanceState.getInt(NAV_ITEM_ID);
 
         }
+        nombre = sessionManager.getName();
+        correo = sessionManager.getCorreo();
+        avatar = sessionManager.getAvatar();
         Log.i(TAG, "El valor es: " + mNavItemId);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        ((TextView) findViewById(R.id.nombre_text)).setText(nombre);
+        ((TextView) findViewById(R.id.email_text)).setText(correo);
+        imagenAvatar = (ImageView) findViewById(R.id.profile_image);
+        //BitmapManager.getInstance().loadBitmap(avatar, imagenAvatar);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

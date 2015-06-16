@@ -15,6 +15,8 @@ public class SessionManager {
     private static final String IS_LOGIN = "isLoggedIn";
     static final String KEY_NAME = "name";
     static final String KEY_EMAIL = "email";
+    static final String KEY_ID_PACIENTE = "idPaciente";
+    static final String KEY_AVATAR = "avatar";
 
     public SessionManager(Context context) {
         this.contexto = context;
@@ -22,10 +24,12 @@ public class SessionManager {
         editor = preferencias.edit();
     }
 
-    public void createLogInSession(String email, String name){
+    public void createLogInSession(String email, String name, int idPaciente, String avatar){
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_NAME, name);
+        editor.putInt(KEY_ID_PACIENTE, idPaciente);
+        editor.putString(KEY_AVATAR, avatar);
         editor.commit();
     }
 
@@ -51,5 +55,17 @@ public class SessionManager {
 
     public boolean isLoggedIn(){
         return preferencias.getBoolean(IS_LOGIN, false);
+    }
+    public String getAvatar(){
+        return preferencias.getString(KEY_AVATAR, "Nana");
+    }
+    public String getName(){
+        return preferencias.getString(KEY_NAME, "Moises de Patzi");
+    }
+    public String getCorreo(){
+        return preferencias.getString(KEY_EMAIL, "moy@gmail.com");
+    }
+    public int getIDPaciente(){
+        return preferencias.getInt(KEY_ID_PACIENTE, 777);
     }
 }

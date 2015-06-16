@@ -1,6 +1,9 @@
 package com.strom.strongfit;
 
 import android.app.DatePickerDialog;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +17,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.strom.strongfit.utils.ConectarHTTP;
+import com.strom.strongfit.utils.SessionManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,13 +42,19 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
     private int dia;
     private int mes;
     private int myYear;
+    private int comida = 1;
+    private float gramos = 100;
+    private int idPaciente;
+    private SessionManager sessionManager;
+    private ConectarHTTP conectarHTTP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alimento);
         setToolBar();
-
+        sessionManager = new SessionManager(this);
+        idPaciente = sessionManager.getIDPaciente();
         Bundle bundle = this.getIntent().getExtras();
         String nombreAlimento = bundle.getString("nombreAlimento");
         idAlimento = bundle.getInt("idAlimento", 0);
@@ -73,13 +85,15 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
         myYear = fechaSeleccionada.get(Calendar.YEAR);
         fecha = fechaFormato.format(fechaHoy);
         botonFecha.setText(fecha);
+        conectarHTTP = new ConectarHTTP();
     }
 
-    public void setToolBar(){
+    public void setToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
-    public void onClickCambiarFecha(View view){
+
+    public void onClickCambiarFecha(View view) {
         Calendar calendario = parseCalendar(botonFecha.getText(), fechaFormato);
         new DatePickerDialog(this, this, calendario.get(Calendar.YEAR),
                 calendario.get(Calendar.MONTH),
@@ -109,11 +123,13 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            int comida = combo.getSelectedItemPosition();
-            float gramos = Float.parseFloat(cantidad.getText().toString());
+            comida = combo.getSelectedItemPosition();
+            gramos = Float.parseFloat(cantidad.getText().toString());
             Log.i(TAG, "Datos a enviar comida: " + comida + " idAlimento " + idAlimento + " cantidad "
                     + gramos + " year: " + myYear + " mes " + mes + " dia " + dia);
             Toast.makeText(this, "Atiendame", Toast.LENGTH_SHORT).show();
+            RegistrarAlimentoTask hilo = new RegistrarAlimentoTask();
+            hilo.execute();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -130,5 +146,32 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
         dia = dayOfMonth;
         fecha = fechaFormato.format(calendario.getTime());
         botonFecha.setText(fecha);
+    }
+
+    class RegistrarAlimentoTask extends AsyncTask<Object, Void, String> {
+
+        @Override
+        protected String doInBackground(Object... params) {
+            ConnectivityManager connMgr = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                String respuesta = conectarHTTP.registrarAlimento(idPaciente, idAlimento, gramos, dia, mes, myYear, comida);
+                return respuesta;
+            } else {
+                Log.e(TAG, "No hay red");
+
+            }
+            return "Algo raro ocurrio";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (s.equals("ok")) {
+                Toast.makeText(getApplicationContext(), "Alimento agregado", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "No se pudo agregar, intentelo mas tarde", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +20,8 @@ import com.strom.strongfit.utils.ConectarHTTP;
 import com.strom.strongfit.utils.SessionManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,7 +29,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText input_password;
     private SessionManager sessionManager;
     private ConectarHTTP conectarHTTP;
-    //private DBOperations dbOperations;
+    private String email = "paciente@gmail.com";
+    private int idPaciente = 0;
+    private String avatar = "avatar";
+    private String nombre = "moy";
+    private String password;
+    private DBOperations dbOperations;
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     @Override
@@ -42,17 +48,21 @@ public class LoginActivity extends AppCompatActivity {
             this.finish();
             startActivity(i);
         }
-        //dbOperations = new DBOperations(this);
+        dbOperations = new DBOperations(this);
         input_email = (EditText) findViewById(R.id.input_email);
         input_password = (EditText) findViewById(R.id.input_password);
         conectarHTTP = new ConectarHTTP();
     }
 
     public void onClickEntrar(View view) {
-        String email = input_email.getText().toString();
-        String password = input_password.getText().toString();
+        email = input_email.getText().toString().trim();
+        password = input_password.getText().toString().trim();
         String[] arrayDatos = new String[]{email, password};
-        new IniciarSesionTask().execute(arrayDatos);
+        if(email.equals("") || password.equals("")){
+            Toast.makeText(this, "Por favor completa los campos", Toast.LENGTH_SHORT).show();
+        }else{
+            new IniciarSesionTask().execute(arrayDatos);
+        }
     }
 
     public class IniciarSesionTask extends AsyncTask<String, Void, String> {
@@ -71,11 +81,17 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             ArrayList<Alimento> listaAlimentos = new ArrayList<Alimento>();
+            Map<String, String> datosPaciente = new HashMap();
             ConnectivityManager connMgr = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
                 String respuesta = conectarHTTP.iniciarSesion(params[0], params[1]);
-                if(respuesta.equals("entra")){
+                if(true){
+                   // datosPaciente = conectarHTTP.getDatosPaciente(email, password);
+//                    nombre = datosPaciente.get("nombre");
+//                    idPaciente = Integer.parseInt(datosPaciente.get("idPaciente"));
+//                    avatar = datosPaciente.get("avatar");
+
                     listaAlimentos = conectarHTTP.getTodosAlimentos();
                     ContentValues values = new ContentValues();
                     for(Alimento alimento : listaAlimentos){
@@ -90,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         Log.i(TAG, "Agregando alimento numero: " + alimento.getAlimentoID());
 
-                        //dbOperations.insertOrIgnore(values);
+                        dbOperations.insertOrIgnore(values);
                     }
                     return respuesta;
                 }
@@ -107,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
             //s.equals("entra")
             if (true) {
                 Intent intent;
-                sessionManager.createLogInSession("paciente@gmail.com", "Moy");
+                sessionManager.createLogInSession(email, nombre, idPaciente, avatar);
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 finish();
                 startActivity(intent);
