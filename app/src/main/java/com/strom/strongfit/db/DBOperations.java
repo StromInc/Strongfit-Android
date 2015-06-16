@@ -45,7 +45,7 @@ public class DBOperations {
                 //Los traemos deacuerdo a su numero de columna
                 alimento.setAlimentoID(cursor.getInt(DBHelper.C_ID_INDEX));
                 alimento.setName(cursor.getString(DBHelper.C_NAME_INDEX));
-                alimento.setCalories(cursor.getFloat(DBHelper.C_CALORIAS_INDEX));
+                alimento.setCalories(String.valueOf(cursor.getFloat(DBHelper.C_CALORIAS_INDEX)));
 
                 alimentosTodos.add(alimento);
 
@@ -62,15 +62,17 @@ public class DBOperations {
         String[] busquedaPalabra  = new String[]{palabra}; //Esto es necesario porque me pide un array
 
         String query = "SELECT * FROM " + DBHelper.TABLE + " WHERE " + DBHelper.C_NAME + " LIKE ?";
-
+        Log.v(TAG, query);
         Cursor cursor = dataBase.rawQuery(query, busquedaPalabra);
         if (cursor.moveToFirst()) {
+            Log.i(TAG, "Entro al cursor");
             while(!cursor.isAfterLast()){
+                Log.i(TAG, "Esta recorriendo el cursor");
                 Alimento alimento = new Alimento();
                 //Los traemos deacuerdo a su numero de columna
                 alimento.setAlimentoID(cursor.getInt(DBHelper.C_ID_INDEX));
                 alimento.setName(cursor.getString(DBHelper.C_NAME_INDEX));
-                alimento.setCalories(cursor.getFloat(DBHelper.C_CALORIAS_INDEX));
+                alimento.setCalories(String.valueOf(cursor.getFloat(DBHelper.C_CALORIAS_INDEX)));
 
                 alimentosEncontrados.add(alimento);
 

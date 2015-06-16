@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class ConectarHTTP {
     //No olviden cambiar la ip
-    private static final String STRONGFITURL = "http://192.168.1.141:8080/StrongFit/";
+    private static final String STRONGFITURL = "http://192.168.1.75:8080/StrongFit/";
     private static final String TAG = ConectarHTTP.class.getSimpleName();
 
     public String iniciarSesion(String correo, String contra){
@@ -87,21 +87,20 @@ public class ConectarHTTP {
                 response.append(linea);
             }
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
-            JSONObject jsonResponse = new JSONObject(response.toString());
-            JSONArray jsonArray = jsonResponse.getJSONArray("alimentos");
+            JSONArray jsonArray = new JSONArray(response.toString());
             JSONObject alimentosJsonObject;
 
             for (int i=0; i<jsonArray.length(); i++) {
                 alimentosJsonObject = (JSONObject) jsonArray.get(i);
                 Alimento alimento = new Alimento();
 
-                alimento.setAlimentoID(alimentosJsonObject.getInt("idAlimento"));
-                alimento.setName(alimentosJsonObject.getString("alimentoName"));
-                alimento.setCalories(alimentosJsonObject.getString("calorias"));
+                alimento.setAlimentoID(alimentosJsonObject.getInt("alimentoID"));
+                alimento.setName(alimentosJsonObject.getString("name"));
+                alimento.setCalories(alimentosJsonObject.getString("calories"));
                 alimento.setLipidos(alimentosJsonObject.getString("lipidos"));
                 alimento.setCarbohidratos(alimentosJsonObject.getString("carbohidratos"));
                 alimento.setProteinas(alimentosJsonObject.getString("proteinas"));
-                alimento.setAlimentoTipo(alimentosJsonObject.getInt("tipoAlimento"));
+                alimento.setAlimentoTipo(alimentosJsonObject.getInt("alimentoTipo"));
 
                 alimentos.add(i, alimento);
             }

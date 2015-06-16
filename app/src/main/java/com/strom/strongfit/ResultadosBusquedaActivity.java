@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.strom.strongfit.adapters.AlimentosAdapter;
+import com.strom.strongfit.db.DBOperations;
 import com.strom.strongfit.models.Alimento;
 import com.strom.strongfit.utils.RecyclerItemClickListener;
 
@@ -30,7 +31,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter alimentosAdapter;
     ArrayList<Alimento> alimentosArrayList;
-    //private DBOperations dbOperations;
+    private DBOperations dbOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +39,10 @@ public class ResultadosBusquedaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resultados_busqueda);
         setToolBar();
         alimentosArrayList = new ArrayList<Alimento>();
-        //dbOperations = new DBOperations(this);
+        dbOperations = new DBOperations(this);
         handleIntent(getIntent());
 
         //Se tiene que hacer la busqueda en la base de datos o en web
-        Alimento taco = new Alimento();
-        taco.setAlimentoID(1);
-        taco.setName("Taco");
-        taco.setCalories("70");
-        alimentosArrayList.add(taco);
-
-        Alimento melon = new Alimento();
-        melon.setAlimentoID(2);
-        melon.setName("Melon");
-        melon.setCalories("90");
-        alimentosArrayList.add(melon);
-
         alimentosAdapter = new AlimentosAdapter(alimentosArrayList, R.layout.row_alimento);
         mRecyclerView = (RecyclerView) findViewById(R.id.alimentos_recycler);
         mRecyclerView.setHasFixedSize(true);
@@ -107,7 +96,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             //use the query to search aqui se hace la busqueda en la base de datos o en web
-            //alimentosArrayList = dbOperations.getBusquedaDeAlimentos(query);
+            alimentosArrayList = dbOperations.getBusquedaDeAlimentos(query);
             Log.w(TAG, query);
         }
     }

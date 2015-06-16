@@ -27,7 +27,7 @@ public class SearchAlimentosActivity extends AppCompatActivity {
     private RecyclerView.Adapter alimentosAdapter;
     private static final String TAG = SearchAlimentosActivity.class.getSimpleName();
     private Toolbar toolbar;
-    //private DBOperations dbOperations;
+    private DBOperations dbOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +35,8 @@ public class SearchAlimentosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_alimentos);
         setToolBar();
         ArrayList<Alimento> alimentosArrayList = new ArrayList<Alimento>();
-        //dbOperations = new DBOperations(this);
-        //alimentosArrayList = dbOperations.getTodosAlimentos();
-        //Se tiene que hacer la busqueda en la base de datos o en web
-        Alimento taco = new Alimento();
-        taco.setAlimentoID(1);
-        taco.setName("Taco");
-        taco.setCalories("70");
-        alimentosArrayList.add(taco);
-
-        Alimento melon = new Alimento();
-        melon.setAlimentoID(2);
-        melon.setName("Melon");
-        melon.setCalories("90");
-        alimentosArrayList.add(melon);
+        dbOperations = new DBOperations(this);
+        alimentosArrayList = dbOperations.getTodosAlimentos();
 
         alimentosAdapter = new AlimentosAdapter(alimentosArrayList, R.layout.row_alimento);
         mRecyclerView = (RecyclerView) findViewById(R.id.alimentos_recycler);

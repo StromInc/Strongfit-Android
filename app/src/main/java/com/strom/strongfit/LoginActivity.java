@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
                 String respuesta = conectarHTTP.iniciarSesion(params[0], params[1]);
-                //s.equals("si")
+                //respuesta.equals("si")
                 if(true){
                    // datosPaciente = conectarHTTP.getDatosPaciente(email, password);
 //                    nombre = datosPaciente.get("nombre");
@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressDialog.dismiss();
-            Log.i(TAG, "La respuesta fue: " + s);
+            Log.i(TAG, "La respuesta en onPostExecute fue: " + s);
             //s.equals("si")
             if (true) {
                 Intent intent;
