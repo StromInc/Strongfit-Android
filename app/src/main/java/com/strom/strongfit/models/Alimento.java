@@ -6,10 +6,10 @@ package com.strom.strongfit.models;
 public class Alimento {
     private int alimentoID;
     private String name;
-    private float calories;
-    private float lipidos;
-    private float carbohidratos;
-    private float proteinas;
+    private String calories;
+    private String lipidos;
+    private String carbohidratos;
+    private String proteinas;
     private int alimentoTipo;
 
     public int getAlimentoID() {
@@ -20,19 +20,19 @@ public class Alimento {
         return name;
     }
 
-    public float getCalories() {
+    public String getCalories() {
         return calories;
     }
 
-    public float getLipidos() {
+    public String getLipidos() {
         return lipidos;
     }
 
-    public float getCarbohidratos() {
+    public String getCarbohidratos() {
         return carbohidratos;
     }
 
-    public float getProteinas() {
+    public String getProteinas() {
         return proteinas;
     }
 
@@ -50,19 +50,19 @@ public class Alimento {
         this.name = name;
     }
 
-    public void setCalories(float calories) {
+    public void setCalories(String calories) {
         this.calories = calories;
     }
 
-    public void setLipidos(float lipidos) {
+    public void setLipidos(String lipidos) {
         this.lipidos = lipidos;
     }
 
-    public void setCarbohidratos(float carbohidratos) {
+    public void setCarbohidratos(String carbohidratos) {
         this.carbohidratos = carbohidratos;
     }
 
-    public void setProteinas(float proteinas) {
+    public void setProteinas(String proteinas) {
         this.proteinas = proteinas;
     }
 

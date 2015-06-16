@@ -97,10 +97,10 @@ public class ConectarHTTP {
 
                 alimento.setAlimentoID(alimentosJsonObject.getInt("idAlimento"));
                 alimento.setName(alimentosJsonObject.getString("alimentoName"));
-                alimento.setCalories((float) alimentosJsonObject.getDouble("calorias"));
-                alimento.setLipidos((float) alimentosJsonObject.getDouble("lipidos"));
-                alimento.setCarbohidratos((float) alimentosJsonObject.getDouble("carbohidratos"));
-                alimento.setProteinas((float) alimentosJsonObject.getDouble("proteinas"));
+                alimento.setCalories(alimentosJsonObject.getString("calorias"));
+                alimento.setLipidos(alimentosJsonObject.getString("lipidos"));
+                alimento.setCarbohidratos(alimentosJsonObject.getString("carbohidratos"));
+                alimento.setProteinas(alimentosJsonObject.getString("proteinas"));
                 alimento.setAlimentoTipo(alimentosJsonObject.getInt("tipoAlimento"));
 
                 alimentos.add(i, alimento);

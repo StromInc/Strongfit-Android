@@ -159,7 +159,6 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
                 return respuesta;
             } else {
                 Log.e(TAG, "No hay red");
-
             }
             return "Algo raro ocurrio";
         }

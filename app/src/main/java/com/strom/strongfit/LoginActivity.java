@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
                 String respuesta = conectarHTTP.iniciarSesion(params[0], params[1]);
+                //s.equals("si")
                 if(true){
                    // datosPaciente = conectarHTTP.getDatosPaciente(email, password);
 //                    nombre = datosPaciente.get("nombre");
@@ -119,8 +120,8 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressDialog.dismiss();
-            Log.i(TAG, s);
-            //s.equals("entra")
+            Log.i(TAG, "La respuesta fue: " + s);
+            //s.equals("si")
             if (true) {
                 Intent intent;
                 sessionManager.createLogInSession(email, nombre, idPaciente, avatar);

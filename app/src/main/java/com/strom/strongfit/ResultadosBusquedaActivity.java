@@ -45,13 +45,13 @@ public class ResultadosBusquedaActivity extends AppCompatActivity {
         Alimento taco = new Alimento();
         taco.setAlimentoID(1);
         taco.setName("Taco");
-        taco.setCalories(70);
+        taco.setCalories("70");
         alimentosArrayList.add(taco);
 
         Alimento melon = new Alimento();
         melon.setAlimentoID(2);
         melon.setName("Melon");
-        melon.setCalories(90);
+        melon.setCalories("90");
         alimentosArrayList.add(melon);
 
         alimentosAdapter = new AlimentosAdapter(alimentosArrayList, R.layout.row_alimento);
