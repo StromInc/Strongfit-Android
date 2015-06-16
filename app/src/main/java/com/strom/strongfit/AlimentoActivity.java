@@ -18,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.strom.strongfit.db.DBOperations;
+import com.strom.strongfit.models.Alimento;
 import com.strom.strongfit.utils.ConectarHTTP;
 import com.strom.strongfit.utils.SessionManager;
 
@@ -47,21 +49,25 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
     private int idPaciente;
     private SessionManager sessionManager;
     private ConectarHTTP conectarHTTP;
+    private DBOperations dbOperations;
+    private Alimento miAlimento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alimento);
         setToolBar();
+        dbOperations = new DBOperations(this);
         sessionManager = new SessionManager(this);
         idPaciente = sessionManager.getIDPaciente();
         Bundle bundle = this.getIntent().getExtras();
-        String nombreAlimento = bundle.getString("nombreAlimento");
         idAlimento = bundle.getInt("idAlimento", 0);
-        float calorias = bundle.getFloat("calorias", 0);
-        float carbohidratos = bundle.getFloat("carbohidratos", 0);
-        float lipidos = bundle.getFloat("lipidos", 0);
-        float proteinas = bundle.getFloat("proteinas", 0);
+        miAlimento = dbOperations.getDatosAlimento(idAlimento);
+        String calorias = miAlimento.getCalories();
+        String carbohidratos = miAlimento.getCarbohidratos();
+        String lipidos = miAlimento.getLipidos();
+        String proteinas = miAlimento.getProteinas();
+        String nombreAlimento = miAlimento.getName();
 
         setTitle(nombreAlimento);
         botonFecha = (Button) findViewById(R.id.btn_fecha);

@@ -20,8 +20,9 @@ import java.util.Map;
  * Created by Alumno on 09/06/2015.
  */
 public class ConectarHTTP {
-    //No olviden cambiar la ip
-    private static final String STRONGFITURL = "http://192.168.1.120:8080/StrongFit/";
+    //No olviden cambiar la ip, la ruta principal de neustro proyecto
+    private static final String STRONGFITURL = "http://192.168.1.75:8080/StrongFit/";
+    //Esto recupera el nombre de la clase
     private static final String TAG = ConectarHTTP.class.getSimpleName();
 
     public String iniciarSesion(String correo, String contra){
@@ -29,6 +30,7 @@ public class ConectarHTTP {
         BufferedReader bufferedReader = null;
         StringBuilder response = null;
         try {
+            //La solicitud post
             String postParameters = "correo=" + correo + "&contra=" + contra;
             Log.i(TAG, "ParametrosPost: " + postParameters);
 

@@ -28,13 +28,14 @@ public class SearchAlimentosActivity extends AppCompatActivity {
     private static final String TAG = SearchAlimentosActivity.class.getSimpleName();
     private Toolbar toolbar;
     private DBOperations dbOperations;
+    ArrayList<Alimento> alimentosArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_alimentos);
         setToolBar();
-        ArrayList<Alimento> alimentosArrayList = new ArrayList<Alimento>();
+        alimentosArrayList = new ArrayList<Alimento>();
         dbOperations = new DBOperations(this);
         alimentosArrayList = dbOperations.getTodosAlimentos();
 
@@ -48,14 +49,11 @@ public class SearchAlimentosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 //Cuando se da click se hace la busqueda en la base de datos o en web
+                Alimento seleccionado = new Alimento();
+                seleccionado = alimentosArrayList.get(position);
                 Intent intent = new Intent(getApplicationContext(), AlimentoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("nombreAlimento", "Alimento pasado");
-                bundle.putInt("idAlimento", 1);
-                bundle.putFloat("calorias", (float) 90.5);
-                bundle.putFloat("lipidos", (float) 777.0);
-                bundle.putFloat("proteinas", (float) 666.0);
-                bundle.putFloat("carbohidratos", (float) 90.0);
+                bundle.putInt("idAlimento", seleccionado.getAlimentoID());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

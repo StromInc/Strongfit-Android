@@ -83,26 +83,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (itemID){
             case R.id.home_menu:
-                Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
                 MainFragment mainFragment = new MainFragment();
                 fragmentTransaction.replace(R.id.frame_content, mainFragment);
                 fragmentTransaction.commit();
                 setTitle("Conteo Calorico");
                 return true;
             case R.id.alimentos_menu:
-                Toast.makeText(getApplicationContext(), "Alimentos", Toast.LENGTH_SHORT).show();
                 mNavItemId = R.id.home_menu;
                 Intent intent = new Intent(this, SearchAlimentosActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.perfil_menu:
-                Toast.makeText(getApplicationContext(), "Mi Perfil", Toast.LENGTH_SHORT).show();
                 mNavItemId = R.id.home_menu;
                 Intent intent2 = new Intent(this, ProfileActivity.class);
                 startActivity(intent2);
                 return true;
             case R.id.salir_menu:
-                Toast.makeText(getApplicationContext(), "Salir", Toast.LENGTH_SHORT).show();
                 sessionManager.logOutUser();
                 finish();
                 return true;
