@@ -39,7 +39,6 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
         Log.d(TAG, "Nombre: " + alimento.getName());
         holder.alimento_nombre.setText(alimento.getName());
         holder.alimento_calorias.setText(alimento.getCalories() + " kcal");
-        holder.alimento_id.setText(String.valueOf(alimento.getAlimentoID()));
     }
 
     @Override
@@ -50,14 +49,12 @@ public class AlimentosAdapter extends RecyclerView.Adapter<AlimentosAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView alimento_nombre;
         private TextView alimento_calorias;
-        private TextView alimento_id;
 
         public ViewHolder(View itemView) {
             super(itemView);
             Log.d(TAG, "-----------Entro al constructor Holder------------");
             alimento_nombre = (TextView) itemView.findViewById(R.id.alimento_nombre);
             alimento_calorias = (TextView) itemView.findViewById(R.id.alimento_calorias);
-            alimento_id = (TextView) itemView.findViewById(R.id.alimento_id);
         }
     }
 }

@@ -21,13 +21,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/alimento_id"
-            android:text="@string/text_id"
-            android:visibility="invisible" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/alimento_nombre"
             android:textAppearance="?android:attr/textAppearanceListItem"
             android:text="@string/text_alimento"
@@ -43,7 +36,7 @@
             android:textAppearance="?android:attr/textAppearanceListItemSmall"
             android:text="@string/text_calorias"
             android:layout_below="@+id/alimento_nombre"
-            android:layout_toRightOf="@+id/alimento_id"
-            android:layout_toEndOf="@+id/alimento_id" />
+            android:layout_alignLeft="@+id/alimento_nombre"
+            android:layout_alignStart="@+id/alimento_nombre"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

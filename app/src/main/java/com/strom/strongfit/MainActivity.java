@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.strom.strongfit.fragments.MainFragment;
-import com.strom.strongfit.utils.BitmapManager;
 import com.strom.strongfit.utils.SessionManager;
 
 

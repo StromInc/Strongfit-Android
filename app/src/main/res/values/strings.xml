@@ -9,10 +9,6 @@
     <string name="hint_email">Email</string>
     <string name="hint_pass">Password</string>
 
-    <array name="titles_paciente">
-        <item>Consumo</item>
-        <item>Mis datos</item>
-    </array>
     <array name="array_comidas">
         <item>Desayuno</item>
         <item>Colación 1</item>
@@ -36,4 +32,7 @@
     <string name="search_hint">Buscar alimentos</string>
     <string name="search_label">Alimentos</string>
     <string name="alimento_title">Informacion Nutrimental</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -3,6 +3,7 @@ package com.strom.strongfit.utils;
 import android.util.Log;
 
 import com.strom.strongfit.models.Alimento;
+import com.strom.strongfit.models.Consumido;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -204,5 +205,101 @@ public class ConectarHTTP {
             }
         }
         return datosPaciente;
+    }
+
+    public ArrayList<Consumido> getAlimentosFecha(int dia, int mes, int year, int idPaciente){
+        ArrayList<Consumido> consumidos = new ArrayList<Consumido>();
+        HttpURLConnection httpConnection = null;
+        BufferedReader bufferedReader = null;
+        StringBuilder response = null;
+        try {
+            String postParameters = "idPaciente=" + idPaciente + "&day=" + dia + "&month=" + mes
+                    + "&year=" + year;
+            Log.i(TAG, "ParametrosPost: " + postParameters);
+
+            URL url = new URL(STRONGFITURL + "sGetConsumidosFecha");
+            Log.i(TAG, "URL: " + url.toString());
+            httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod("POST");
+            httpConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            httpConnection.setDoOutput(true);
+
+            httpConnection.setFixedLengthStreamingMode(
+                    postParameters.getBytes().length);
+
+            PrintWriter out = new PrintWriter(httpConnection.getOutputStream());
+            out.print(postParameters);
+            out.close();
+
+            Log.w(TAG, "Codigo de respuesta: " + httpConnection.getResponseCode());
+
+            bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
+            String linea;
+            response = new StringBuilder();
+            while((linea = bufferedReader.readLine()) != null){
+                response.append(linea);
+            }
+            JSONArray jsonArray = new JSONArray(response.toString());
+            JSONObject alimentosJsonObject;
+
+            for (int i=0; i<jsonArray.length(); i++) {
+                alimentosJsonObject = (JSONObject) jsonArray.get(i);
+                Consumido alimento = new Consumido();
+
+                alimento.setIdAlta(alimentosJsonObject.getInt("idAlta"));
+                alimento.setNombre(alimentosJsonObject.getString("name"));
+                alimento.setCalorias(alimentosJsonObject.getString("calories"));
+                consumidos.add(i, alimento);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (httpConnection != null) {
+                httpConnection.disconnect();
+            }
+        }
+        return consumidos;
+    }
+    public String borrarAlimento(int idPaciente, int idAlta){
+        HttpURLConnection httpConnection = null;
+        BufferedReader bufferedReader = null;
+        StringBuilder response = null;
+        try {
+            //La solicitud post
+            String postParameters = "idPaciente=" + idPaciente + "&idAlta=" + idAlta;
+            Log.i(TAG, "ParametrosPost: " + postParameters);
+
+            URL url = new URL(STRONGFITURL + "sBorrarAlimentoConsumido");
+            Log.i(TAG, "URL: " + url.toString());
+            httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod("POST");
+            httpConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            httpConnection.setDoOutput(true);
+
+            httpConnection.setFixedLengthStreamingMode(
+                    postParameters.getBytes().length);
+
+            PrintWriter out = new PrintWriter(httpConnection.getOutputStream());
+            out.print(postParameters);
+            out.close();
+
+            Log.w(TAG, "Codigo de respuesta: " + httpConnection.getResponseCode());
+
+            bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
+            String linea;
+            response = new StringBuilder();
+            while((linea = bufferedReader.readLine()) != null){
+                response.append(linea);
+            }
+            Log.i(TAG, "La respuesta del servidor: " + response.toString());
+            return response.toString(); //ok
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error 90";
+        }finally {
+            if (httpConnection != null) {
+                httpConnection.disconnect();
+            }
+        }
     }
 }

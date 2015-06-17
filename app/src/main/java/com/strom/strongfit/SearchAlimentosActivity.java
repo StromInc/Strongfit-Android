@@ -45,19 +45,21 @@ public class SearchAlimentosActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(alimentosAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener(){
-            @Override
-            public void onItemClick(View view, int position) {
-                //Cuando se da click se hace la busqueda en la base de datos o en web
-                Alimento seleccionado = new Alimento();
-                seleccionado = alimentosArrayList.get(position);
-                Intent intent = new Intent(getApplicationContext(), AlimentoActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("idAlimento", seleccionado.getAlimentoID());
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        }));
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
+                new RecyclerItemClickListener.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        //Cuando se da click se hace la busqueda en la base de datos o en web
+                        Alimento seleccionado = new Alimento();
+                        seleccionado = alimentosArrayList.get(position);
+                        Intent intent = new Intent(getApplicationContext(), AlimentoActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("idAlimento", seleccionado.getAlimentoID());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                }
+        ));
     }
 
     public void setToolBar(){
