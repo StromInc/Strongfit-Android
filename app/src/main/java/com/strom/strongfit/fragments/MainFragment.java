@@ -103,7 +103,7 @@ public class MainFragment extends Fragment {
 
         @Override
         protected String doInBackground(Object... params) {
-            String respuesta = conectarHTTP.borrarAlimento(idPaciente, idAlta);
+            String respuesta = conectarHTTP.borrarAlimento(idAlta);
             if(respuesta.equals("ok")){
                 alimentos = conectarHTTP.getAlimentosFecha(dia, month, year, idPaciente);
             }

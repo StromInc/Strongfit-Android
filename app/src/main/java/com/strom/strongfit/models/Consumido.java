@@ -10,6 +10,8 @@ public class Consumido {
     int idAlta;
     String nombre;
     String calorias;
+    float gramos;
+
     public int getIdAlta() {
         return idAlta;
     }
@@ -32,5 +34,13 @@ public class Consumido {
 
     public void setCalorias(String calorias) {
         this.calorias = calorias;
+    }
+
+    public float getGramos() {
+        return gramos;
+    }
+
+    public void setGramos(float gramos) {
+        this.gramos = gramos;
     }
 }

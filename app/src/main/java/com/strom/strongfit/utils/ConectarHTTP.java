@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class ConectarHTTP {
     //No olviden cambiar la ip, la ruta principal de neustro proyecto
-    private static final String STRONGFITURL = "http://192.168.1.75:8080/StrongFit/";
+    private static final String STRONGFITURL = "http://192.168.1.143:8080/StrongFit/";
     //Esto recupera el nombre de la clase
     private static final String TAG = ConectarHTTP.class.getSimpleName();
 
@@ -246,9 +246,10 @@ public class ConectarHTTP {
                 alimentosJsonObject = (JSONObject) jsonArray.get(i);
                 Consumido alimento = new Consumido();
 
-                alimento.setIdAlta(alimentosJsonObject.getInt("idAlta"));
-                alimento.setNombre(alimentosJsonObject.getString("name"));
-                alimento.setCalorias(alimentosJsonObject.getString("calories"));
+                alimento.setIdAlta(alimentosJsonObject.getInt("id"));
+                alimento.setNombre(alimentosJsonObject.getString("nombre"));
+                alimento.setCalorias(alimentosJsonObject.getString("calorias"));
+                alimento.setGramos((float) alimentosJsonObject.getDouble("gramos"));
                 consumidos.add(i, alimento);
             }
         } catch (Exception e) {
@@ -260,16 +261,16 @@ public class ConectarHTTP {
         }
         return consumidos;
     }
-    public String borrarAlimento(int idPaciente, int idAlta){
+    public String borrarAlimento(int idAlta){
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
         StringBuilder response = null;
         try {
             //La solicitud post
-            String postParameters = "idPaciente=" + idPaciente + "&idAlta=" + idAlta;
+            String postParameters = "valor=" + idAlta;
             Log.i(TAG, "ParametrosPost: " + postParameters);
 
-            URL url = new URL(STRONGFITURL + "sBorrarAlimentoConsumido");
+            URL url = new URL(STRONGFITURL + "sBorrarAlimentoFecha");
             Log.i(TAG, "URL: " + url.toString());
             httpConnection = (HttpURLConnection) url.openConnection();
             httpConnection.setRequestMethod("POST");
