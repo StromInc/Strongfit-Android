@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     nombre = datosPaciente.get("nombre");
                     idPaciente = Integer.parseInt(datosPaciente.get("idPaciente"));
                     avatar = datosPaciente.get("avatar");
+                    Log.i(TAG, avatar);
 
                     listaAlimentos = conectarHTTP.getTodosAlimentos();
                     ContentValues values = new ContentValues();

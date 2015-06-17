@@ -133,7 +133,6 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
             gramos = Float.parseFloat(cantidad.getText().toString());
             Log.i(TAG, "Datos a enviar comida: " + comida + " idAlimento " + idAlimento + " cantidad "
                     + gramos + " year: " + myYear + " mes " + mes + " dia " + dia);
-            Toast.makeText(this, "Atiendame", Toast.LENGTH_SHORT).show();
             RegistrarAlimentoTask hilo = new RegistrarAlimentoTask();
             hilo.execute();
             return true;

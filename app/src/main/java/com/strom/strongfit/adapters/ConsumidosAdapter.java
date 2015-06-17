@@ -26,6 +26,21 @@ public class ConsumidosAdapter extends RecyclerView.Adapter<ConsumidosAdapter.Vi
         this.itemLayout = itemLayout;
     }
 
+    public void updateList(ArrayList<Consumido> data) {
+        alimentosArrayList = data;
+        notifyDataSetChanged();
+    }
+
+    public void addItem(int position, Consumido data) {
+        alimentosArrayList.add(position, data);
+        notifyItemInserted(position);
+    }
+
+    public void removeItem(int position) {
+        alimentosArrayList.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @Override
     public ConsumidosAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false);

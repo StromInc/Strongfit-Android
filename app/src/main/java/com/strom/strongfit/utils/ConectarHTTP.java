@@ -195,6 +195,7 @@ public class ConectarHTTP {
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
             JSONObject pacienteJsonObject = new JSONObject(response.toString());
             datosPaciente.put("nombre", pacienteJsonObject.getString("nombre"));
+            datosPaciente.put("avatar", pacienteJsonObject.getString("avatar"));
             datosPaciente.put("idPaciente", pacienteJsonObject.getString("idPaciente"));
 
         } catch (Exception e) {
