@@ -28,7 +28,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
+//esta clase solo despliega los datos del alimento en base a una consulta a la base de datos
+//en base a un ID que se obtiene por un bundle al darle click a un alimento de la clase anterior
+//Y despues se realiza un alta en base a la fecha, los gramos, el ID del paciente y se manda por la
+//clase ConectarHTTP y ya, y usa hilos
 public class AlimentoActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Toolbar toolbar;  //La barrita
     private TextView textCalorias, textLipidos, textProteinas, textCarbohidratos;

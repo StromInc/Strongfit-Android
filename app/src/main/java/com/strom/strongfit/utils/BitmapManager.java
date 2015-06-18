@@ -22,6 +22,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by USER on 12/03/2015.
  */
+//Esta cosa hace magia, es lo unico que deben saber
 public class BitmapManager {
 
     private final Map<String, SoftReference<Bitmap>> cache;

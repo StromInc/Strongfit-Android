@@ -3,7 +3,6 @@ package com.strom.strongfit;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.strom.strongfit.adapters.AlimentosAdapter;
@@ -24,7 +22,7 @@ import com.strom.strongfit.utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
-
+//Les dije que use un chingo de arrays
 public class ResultadosBusquedaActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private static final String TAG = ResultadosBusquedaActivity.class.getSimpleName();
@@ -44,7 +42,8 @@ public class ResultadosBusquedaActivity extends AppCompatActivity {
         if(alimentosArrayList.size() == 0){
             setTitle("No se encontraron alimentos");
         }
-        //Se tiene que hacer la busqueda en la base de datos o en web
+        //Esto crea la lista de alimentos en base a la data osea el arrayList y su contenedor que en
+        //este caso es row_alimento
         alimentosAdapter = new AlimentosAdapter(alimentosArrayList, R.layout.row_alimento);
         mRecyclerView = (RecyclerView) findViewById(R.id.alimentos_recycler);
         mRecyclerView.setHasFixedSize(true);
@@ -89,7 +88,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         handleIntent(intent);
     }
-
+    //Aqui se realiza la peticion a la base de datos local
     private void handleIntent(Intent intent) {
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {

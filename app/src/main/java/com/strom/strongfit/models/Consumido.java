@@ -6,6 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by USER on 16/06/2015.
  */
+//Aplica el mismo concepto que la clase Alimento pero para los Alimentos consumidos
 public class Consumido {
     int idAlta;
     String nombre;

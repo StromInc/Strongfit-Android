@@ -24,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String C_CARBOHIDRATOS = "carbohidratos";
     public static final String C_PROTEINAS = "proteinas";
     public static final String C_TIPO_ALIMENTO = "tipo_alimento";
-    //Esto nos sirve para recorrer los cursores que es donde se almacenan los datos
+    //Esto nos sirve para recorrer los cursores que es donde se almacenan los datos, son las columnas
     public static final int C_ID_INDEX = 0;
     public static final int C_NAME_INDEX = 1;
     public static final int C_CALORIAS_INDEX = 2;
@@ -39,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Este metodo crea la tabla de alimentos
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        //nuestro maldito query
         String sql = "create table " + TABLE + " (" + C_ID + " int primary key, " + C_NAME + " text, "
                 + C_CALORIAS + " float, " + C_LIPIDOS + " float, " + C_CARBOHIDRATOS + " float, "
                 + C_PROTEINAS + " float, " + C_TIPO_ALIMENTO + " int);";

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 /**
  * Created by Alumno on 22/05/2015.
  */
+//La cague, esta clase no la uso, pero puede hacerlo para no repetir codigo
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener{
     private OnItemClickListener mListener;
     GestureDetector mGestureDetector;

@@ -25,23 +25,24 @@ public class ConectarHTTP {
     private static final String STRONGFITURL = "http://192.168.1.75:8080/StrongFit/";
     //Esto recupera el nombre de la clase
     private static final String TAG = ConectarHTTP.class.getSimpleName();
-
+    //Esto inicia sesion duh! le paso el correo y la contraseña
     public String iniciarSesion(String correo, String contra){
-        HttpURLConnection httpConnection = null;
-        BufferedReader bufferedReader = null;
-        StringBuilder response = null;
+        HttpURLConnection httpConnection = null; //Lo usamos para establecer una conexion
+        BufferedReader bufferedReader = null; //Leemos lo que nos escupa la pagina
+        StringBuilder response = null; //Crea un string en base al buffer
         try {
             //La solicitud post
             String postParameters = "correo=" + correo + "&contra=" + contra;
             Log.i(TAG, "ParametrosPost: " + postParameters);
 
-            URL url = new URL(STRONGFITURL + "sLoginAndroid");
+            URL url = new URL(STRONGFITURL + "sLoginAndroid"); //La url de consulta
             Log.i(TAG, "URL: " + url.toString());
             httpConnection = (HttpURLConnection) url.openConnection();
+            //Le decimos que es post
             httpConnection.setRequestMethod("POST");
             httpConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpConnection.setDoOutput(true);
-
+            //Con esto escribimos, le pasamos parametros
             httpConnection.setFixedLengthStreamingMode(
                     postParameters.getBytes().length);
 
@@ -50,7 +51,7 @@ public class ConectarHTTP {
             out.close();
 
             Log.w(TAG, "Codigo de respuesta: " + httpConnection.getResponseCode());
-
+            //Leemos la respuesta
             bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
             String linea;
             response = new StringBuilder();
@@ -64,11 +65,12 @@ public class ConectarHTTP {
             return "Error 90";
         }finally {
             if (httpConnection != null) {
-                httpConnection.disconnect();
+                httpConnection.disconnect(); //Cerramos la conexion
             }
         }
     }
-
+    //Hace lo mismo que la de arriba pero con otros datos
+    //Obtiene todos nuestros alimentos
     public ArrayList<Alimento> getTodosAlimentos(){
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
@@ -90,9 +92,10 @@ public class ConectarHTTP {
                 response.append(linea);
             }
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
-            JSONArray jsonArray = new JSONArray(response.toString());
+            JSONArray jsonArray = new JSONArray(response.toString()); //El string lo convertimos en un json
             JSONObject alimentosJsonObject;
-
+            //Recorremos el json y obtenemos lo que necesitamos agregandolo al modelo de alimento
+            //Para despues meterlo en un arrayList
             for (int i=0; i<jsonArray.length(); i++) {
                 alimentosJsonObject = (JSONObject) jsonArray.get(i);
                 Alimento alimento = new Alimento();
@@ -117,6 +120,7 @@ public class ConectarHTTP {
         }
         return alimentos;
     }
+    //Registra el alimento en base a la fecha
     public String registrarAlimento(int idPaciente, int idAlimento, float gramos, int day, int month, int year, int tipoComida){
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
@@ -160,7 +164,7 @@ public class ConectarHTTP {
             }
         }
     }
-
+    //Obtenemos el id del paciente, el nombre y su foto
     public Map<String, String> getDatosPaciente(String correo, String contra){
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
@@ -207,7 +211,7 @@ public class ConectarHTTP {
         }
         return datosPaciente;
     }
-
+    //Recupera todos los alimentos consumidos en alguna fecha
     public ArrayList<Consumido> getAlimentosFecha(int dia, int mes, int year, int idPaciente){
         ArrayList<Consumido> consumidos = new ArrayList<Consumido>();
         HttpURLConnection httpConnection = null;
@@ -262,6 +266,7 @@ public class ConectarHTTP {
         }
         return consumidos;
     }
+    //Borra el alimento a la verga
     public String borrarAlimento(int idAlta){
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;

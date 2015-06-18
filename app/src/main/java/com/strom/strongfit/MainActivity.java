@@ -57,11 +57,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         correo = sessionManager.getCorreo();
         avatar = sessionManager.getAvatar();
         Log.i(TAG, "El valor es: " + mNavItemId);
+        //le metemos el correo, el nombre y la imagen de perfil
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         ((TextView) findViewById(R.id.nombre_text)).setText(nombre);
         ((TextView) findViewById(R.id.email_text)).setText(correo);
         imagenAvatar = (ImageView) findViewById(R.id.profile_image);
         BitmapManager.getInstance().loadBitmap(avatar, imagenAvatar);
+        //Esto solo controla el menu lateral
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer_toggle.syncState();
         navigate(mNavItemId);
     }
+    //Con esto cambiamos de pantalla
     public boolean navigate(int itemID){
         Log.i(TAG, "el id " + itemID);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -132,19 +135,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.i(TAG, "el valor onresume es: " + mNavItemId);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);
     }
+    //Con este metodo manejamos la entrada y salida de la aplicacion
     public void showDialog() {
         SalirDialogFragment newFragment = new SalirDialogFragment();
         newFragment.setTitulo(R.string.titulo_salir);
         newFragment.show(getSupportFragmentManager(), "Dialogo");
     }
-
+    //SI elige salir
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         Log.e(TAG, "Positivo");
         sessionManager.logOutUser();
         finish();
     }
-
+    //Si le da hueva cerrar sesion
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         mNavItemId = R.id.home_menu;

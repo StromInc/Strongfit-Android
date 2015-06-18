@@ -77,13 +77,14 @@ public class MainFragment extends Fragment{
         alimentos = new ArrayList<Consumido>();
         conectarHTTP = new ConectarHTTP();
         sessionManager = new SessionManager(getActivity());
+        //Los datos para guardar el alimento
         Calendar cal = Calendar.getInstance();
         dia = cal.get(Calendar.DATE);
         month = cal.get(Calendar.MONTH);
         year = cal.get(Calendar.YEAR);
         idPaciente = sessionManager.getIDPaciente();
         textCaloriasConsumidas = (TextView) getActivity().findViewById(R.id.text_consumo);
-
+        //Este pedazote de codigo genera la lista de alimentos y escucha los clicks sobre cada elemento
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.consumidos_recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -116,6 +117,7 @@ public class MainFragment extends Fragment{
         ));
     }
     public void actualizarCalorias(){
+        caloriasConsumidas = 0;
         for(Consumido consumido : alimentos){
             caloriasConsumidas += Float.parseFloat(consumido.getCalorias());
         }
@@ -127,7 +129,7 @@ public class MainFragment extends Fragment{
         recyclerView.setAdapter(new ConsumidosAdapter(consumidos, R.layout.row_alimento));
         actualizarCalorias();
     }
-
+    //Este hilo borra y llama a un metodo que actuliza la vista
     public class BorrarAlimentosTask extends AsyncTask<Object, Void, String>{
         private ProgressDialog progressDialog;
         @Override
@@ -159,6 +161,7 @@ public class MainFragment extends Fragment{
             }
         }
     }
+    //Recuperamos nuestros preciados alimentos consumidos
     public class GetConsumidosTask extends AsyncTask<Object, Void, ArrayList<Consumido>>{
 
         @Override

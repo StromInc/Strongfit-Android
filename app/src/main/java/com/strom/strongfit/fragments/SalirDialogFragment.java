@@ -12,6 +12,7 @@ import com.strom.strongfit.R;
 /**
  * Created by USER on 17/06/2015.
  */
+//esto crea el dialogo
 public class SalirDialogFragment extends DialogFragment{
     public interface DialogListener{
         public void onDialogPositiveClick(DialogFragment dialog);
@@ -37,14 +38,14 @@ public class SalirDialogFragment extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+        //Si le dio si
         builder.setTitle(titulo)
                 .setPositiveButton("Si, estoy seguro", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         listener.onDialogPositiveClick(SalirDialogFragment.this);
                     }
-                })
+                }) //Si le dio no
                 .setNegativeButton("No lo estoy", new DialogInterface.OnClickListener() {
 
                     @Override

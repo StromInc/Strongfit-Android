@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             new IniciarSesionTask().execute(arrayDatos);
         }
     }
-
+    //Hilo para iniciar sesion y traer datos
     public class IniciarSesionTask extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog;
 
@@ -77,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.setMessage("Se estan configurando algunas cosas");
             progressDialog.show();
         }
-
+        //Solo recuperamos los alimentos y los datos de usuario, los primeros se guarndan en la base
+        //Y el resto en las preferencias
         @Override
         protected String doInBackground(String... params) {
             ArrayList<Alimento> listaAlimentos = new ArrayList<Alimento>();
@@ -115,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             return "Algo raro ocurrio";
         }
+        //Al final te deja pasar si estas dado de alta en el sistema
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);

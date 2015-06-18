@@ -16,6 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by USER on 16/06/2015.
  */
+//Aqui la cague pude haber utilizado la clase de AlimentosAdapter
 public class ConsumidosAdapter extends RecyclerView.Adapter<ConsumidosAdapter.ViewHolder> {
     ArrayList<Consumido> alimentosArrayList;
     int itemLayout;

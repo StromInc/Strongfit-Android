@@ -3,6 +3,7 @@ package com.strom.strongfit.models;
 /**
  * Created by USER on 21/05/2015.
  */
+//Un modelo de alimento duh!
 public class Alimento {
     private int alimentoID;
     private String name;
@@ -11,7 +12,7 @@ public class Alimento {
     private String carbohidratos;
     private String proteinas;
     private int alimentoTipo;
-
+    //con los get obtenemos informacion
     public int getAlimentoID() {
         return alimentoID;
     }
@@ -40,7 +41,7 @@ public class Alimento {
         return alimentoTipo;
     }
 
-    //Luego van los set
+    //Luego van los set y le ponemos los this para que no se apendeje
 
     public void setAlimentoID(int alimentoID) {
         this.alimentoID = alimentoID;
