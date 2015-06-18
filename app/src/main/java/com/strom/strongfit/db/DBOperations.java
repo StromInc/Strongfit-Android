@@ -37,7 +37,7 @@ public class DBOperations {
         ArrayList<Alimento> alimentosTodos = new ArrayList<Alimento>();
         //Traemos todos los alimentos
         SQLiteDatabase dataBase = dbHelper.getReadableDatabase();
-        Cursor cursor = dataBase.query(DBHelper.TABLE, null, null, null, null, null, null);
+        Cursor cursor = dataBase.query(DBHelper.TABLE, null, null, null, null, null, null, "20");
 
         if (cursor.moveToFirst()) {
             while(!cursor.isAfterLast()){

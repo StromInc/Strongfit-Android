@@ -3,6 +3,7 @@ package com.strom.strongfit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,10 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.strom.strongfit.fragments.MainFragment;
+import com.strom.strongfit.fragments.SalirDialogFragment;
+import com.strom.strongfit.utils.BitmapManager;
 import com.strom.strongfit.utils.SessionManager;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SalirDialogFragment.DialogListener {
 
     private DrawerLayout drawerLayout; //Lo necesitamos para poner un menu lateral
     private NavigationView navigationView;
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ((TextView) findViewById(R.id.nombre_text)).setText(nombre);
         ((TextView) findViewById(R.id.email_text)).setText(correo);
         imagenAvatar = (ImageView) findViewById(R.id.profile_image);
-        //BitmapManager.getInstance().loadBitmap(avatar, imagenAvatar);
+        BitmapManager.getInstance().loadBitmap(avatar, imagenAvatar);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -98,8 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent2);
                 return true;
             case R.id.salir_menu:
-                sessionManager.logOutUser();
-                finish();
+                showDialog();
                 return true;
             default:
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
@@ -129,5 +131,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         Log.i(TAG, "el valor onresume es: " + mNavItemId);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);
+    }
+    public void showDialog() {
+        SalirDialogFragment newFragment = new SalirDialogFragment();
+        newFragment.setTitulo(R.string.titulo_salir);
+        newFragment.show(getSupportFragmentManager(), "Dialogo");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Log.e(TAG, "Positivo");
+        sessionManager.logOutUser();
+        finish();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        mNavItemId = R.id.home_menu;
+        navigationView.getMenu().findItem(mNavItemId).setChecked(true);
+        Log.e(TAG, "Negativo");
     }
 }

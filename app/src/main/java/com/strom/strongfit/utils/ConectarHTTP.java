@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class ConectarHTTP {
     //No olviden cambiar la ip, la ruta principal de neustro proyecto
-    private static final String STRONGFITURL = "http://192.168.1.143:8080/StrongFit/";
+    private static final String STRONGFITURL = "http://192.168.1.75:8080/StrongFit/";
     //Esto recupera el nombre de la clase
     private static final String TAG = ConectarHTTP.class.getSimpleName();
 
@@ -195,7 +195,7 @@ public class ConectarHTTP {
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
             JSONObject pacienteJsonObject = new JSONObject(response.toString());
             datosPaciente.put("nombre", pacienteJsonObject.getString("nombre"));
-            datosPaciente.put("avatar", pacienteJsonObject.getString("avatar"));
+            datosPaciente.put("avatar", STRONGFITURL + pacienteJsonObject.getString("avatar"));
             datosPaciente.put("idPaciente", pacienteJsonObject.getString("idPaciente"));
 
         } catch (Exception e) {

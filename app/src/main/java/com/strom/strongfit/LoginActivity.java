@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     nombre = datosPaciente.get("nombre");
                     idPaciente = Integer.parseInt(datosPaciente.get("idPaciente"));
                     avatar = datosPaciente.get("avatar");
-                    Log.i(TAG, avatar);
+                    Log.i(TAG, "La url del avatar fue: " + avatar);
 
                     listaAlimentos = conectarHTTP.getTodosAlimentos();
                     ContentValues values = new ContentValues();
@@ -105,8 +105,6 @@ public class LoginActivity extends AppCompatActivity {
                         values.put(DBHelper.C_CARBOHIDRATOS, alimento.getCarbohidratos());
                         values.put(DBHelper.C_PROTEINAS, alimento.getProteinas());
                         values.put(DBHelper.C_TIPO_ALIMENTO, alimento.getAlimentoTipo());
-
-                        Log.i(TAG, "Agregando alimento numero: " + alimento.getAlimentoID());
 
                         dbOperations.insertOrIgnore(values);
                     }
