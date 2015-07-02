@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         sessionManager = new SessionManager(this);
-        if(sessionManager.isLoggedIn()){
+        if (sessionManager.isLoggedIn()) {
             Intent i = new Intent(this, MainActivity.class);
             this.finish();
             startActivity(i);
@@ -58,12 +58,13 @@ public class LoginActivity extends AppCompatActivity {
         email = input_email.getText().toString().trim();
         password = input_password.getText().toString().trim();
         String[] arrayDatos = new String[]{email, password};
-        if(email.equals("") || password.equals("")){
+        if (email.equals("") || password.equals("")) {
             Toast.makeText(this, "Por favor completa los campos", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             new IniciarSesionTask().execute(arrayDatos);
         }
     }
+
     //Hilo para iniciar sesion y traer datos
     public class IniciarSesionTask extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog;
@@ -77,18 +78,19 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.setMessage("Se estan configurando algunas cosas");
             progressDialog.show();
         }
+
         //Solo recuperamos los alimentos y los datos de usuario, los primeros se guarndan en la base
         //Y el resto en las preferencias
         @Override
         protected String doInBackground(String... params) {
-            ArrayList<Alimento> listaAlimentos = new ArrayList<Alimento>();
+            ArrayList<Alimento> listaAlimentos = new ArrayList<>();
             Map<String, String> datosPaciente = new HashMap();
             ConnectivityManager connMgr = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
                 String respuesta = conectarHTTP.iniciarSesion(params[0], params[1]);
                 //respuesta.equals("si")
-                if(respuesta.equals("si")){
+                if (respuesta.equals("si")) {
                     datosPaciente = conectarHTTP.getDatosPaciente(email, password);
                     nombre = datosPaciente.get("nombre");
                     idPaciente = Integer.parseInt(datosPaciente.get("idPaciente"));
@@ -97,10 +99,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     listaAlimentos = conectarHTTP.getTodosAlimentos();
                     ContentValues values = new ContentValues();
-                    for(Alimento alimento : listaAlimentos){
+                    for (Alimento alimento : listaAlimentos) {
                         values.clear();
-                        values.put(DBHelper.C_ID, alimento.getAlimentoID());
-                        values.put(DBHelper.C_NAME, alimento.getName());
+                        values.put(DBHelper.C_ID_ALIMENTO, alimento.getAlimentoID());
+                        values.put(DBHelper.C_NAME_ALIMENTO, alimento.getName());
                         values.put(DBHelper.C_CALORIAS, alimento.getCalories());
                         values.put(DBHelper.C_LIPIDOS, alimento.getLipidos());
                         values.put(DBHelper.C_CARBOHIDRATOS, alimento.getCarbohidratos());
@@ -116,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             return "Algo raro ocurrio";
         }
+
         //Al final te deja pasar si estas dado de alta en el sistema
         @Override
         protected void onPostExecute(String s) {
@@ -129,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 finish();
                 startActivity(intent);
-            }else {
+            } else {
                 Toast.makeText(getApplicationContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show();
             }
         }

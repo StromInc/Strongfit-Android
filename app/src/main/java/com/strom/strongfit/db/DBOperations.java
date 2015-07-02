@@ -10,9 +10,6 @@ import com.strom.strongfit.models.Alimento;
 
 import java.util.ArrayList;
 
-/**
- * Created by USER on 14/06/2015.
- */
 public class DBOperations {
 
     private static final String TAG = DBOperations.class.getSimpleName();
@@ -28,25 +25,25 @@ public class DBOperations {
         SQLiteDatabase dataBase = dbHelper.getWritableDatabase();
         //Esto es para que no se repitan los alimentos si la tabla se tiene que actualizar
         try{
-            dataBase.insertWithOnConflict(DBHelper.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+            dataBase.insertWithOnConflict(DBHelper.TABLE_ALIMENTOS, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         }finally {
             dataBase.close();
         }
     }
     //Este metodo nos va a traer todos los alimentos
     public ArrayList<Alimento> getTodosAlimentos(){
-        ArrayList<Alimento> alimentosTodos = new ArrayList<Alimento>();
+        ArrayList<Alimento> alimentosTodos = new ArrayList<>();
         //Traemos todos los alimentos
         SQLiteDatabase dataBase = dbHelper.getReadableDatabase();
         //Solo traemos 20 alimentos
-        Cursor cursor = dataBase.query(DBHelper.TABLE, null, null, null, null, null, null, "20");
+        Cursor cursor = dataBase.query(DBHelper.TABLE_ALIMENTOS, null, null, null, null, null, null, "20");
 
         if (cursor.moveToFirst()) {
             while(!cursor.isAfterLast()){
                 Alimento alimento = new Alimento();
                 //Los traemos deacuerdo a su numero de columna
-                alimento.setAlimentoID(cursor.getInt(DBHelper.C_ID_INDEX));
-                alimento.setName(cursor.getString(DBHelper.C_NAME_INDEX));
+                alimento.setAlimentoID(cursor.getInt(DBHelper.C_ID_ALIMENTO_INDEX));
+                alimento.setName(cursor.getString(DBHelper.C_NAME_ALIMENTO_INDEX));
                 alimento.setCalories(String.valueOf(cursor.getFloat(DBHelper.C_CALORIAS_INDEX)));
 
                 alimentosTodos.add(alimento);
@@ -59,13 +56,13 @@ public class DBOperations {
     }
     //Para el buscador de alimentos
     public ArrayList<Alimento> getBusquedaDeAlimentos(String palabra){
-        ArrayList<Alimento> alimentosEncontrados = new ArrayList<Alimento>();
+        ArrayList<Alimento> alimentosEncontrados = new ArrayList<>();
         SQLiteDatabase dataBase = dbHelper.getReadableDatabase();
 
         String[] busquedaPalabra  = new String[1]; //Esto es necesario porque me pide un array
         busquedaPalabra[0] = palabra + "%";
         //un tipico query
-        String query = "SELECT * FROM " + DBHelper.TABLE + " WHERE " + DBHelper.C_NAME + " LIKE ?";
+        String query = "SELECT * FROM " + DBHelper.TABLE_ALIMENTOS + " WHERE " + DBHelper.C_NAME_ALIMENTO + " LIKE ?";
         Log.v(TAG, query);
 
         Cursor cursor = dataBase.rawQuery(query, busquedaPalabra);
@@ -75,8 +72,8 @@ public class DBOperations {
                 Log.i(TAG, "Esta recorriendo el cursor");
                 Alimento alimento = new Alimento();
                 //Los traemos deacuerdo a su numero de columna
-                alimento.setAlimentoID(cursor.getInt(DBHelper.C_ID_INDEX));
-                alimento.setName(cursor.getString(DBHelper.C_NAME_INDEX));
+                alimento.setAlimentoID(cursor.getInt(DBHelper.C_ID_ALIMENTO_INDEX));
+                alimento.setName(cursor.getString(DBHelper.C_NAME_ALIMENTO_INDEX));
                 alimento.setCalories(String.valueOf(cursor.getFloat(DBHelper.C_CALORIAS_INDEX)));
 
                 alimentosEncontrados.add(alimento);
@@ -91,18 +88,18 @@ public class DBOperations {
     public Alimento getDatosAlimento(int id){
         Alimento alimentoEncontrado = new Alimento();
 
-        String selection = DBHelper.C_ID + " =? ";
+        String selection = DBHelper.C_ID_ALIMENTO + " =? ";
         String[] parametros = new String[]{String.valueOf(id)}; //Tiene que ser string
         SQLiteDatabase dataBase = dbHelper.getReadableDatabase();
 
-        Cursor cursor = dataBase.query(DBHelper.TABLE, null, selection, parametros, null, null, null);
+        Cursor cursor = dataBase.query(DBHelper.TABLE_ALIMENTOS, null, selection, parametros, null, null, null);
         if(cursor.moveToFirst()){
             Log.v(TAG, "Entro al cursor");
             while(!cursor.isAfterLast()){
                 Log.v(TAG, "Entro al while");
                 //obtenemos nuestros datos por cursores
-                alimentoEncontrado.setAlimentoID(cursor.getInt(DBHelper.C_ID_INDEX));
-                alimentoEncontrado.setName(cursor.getString(DBHelper.C_NAME_INDEX));
+                alimentoEncontrado.setAlimentoID(cursor.getInt(DBHelper.C_ID_ALIMENTO_INDEX));
+                alimentoEncontrado.setName(cursor.getString(DBHelper.C_NAME_ALIMENTO_INDEX));
                 alimentoEncontrado.setCalories(String.valueOf(cursor.getFloat(DBHelper.C_CALORIAS_INDEX)));
                 alimentoEncontrado.setLipidos(String.valueOf(cursor.getFloat(DBHelper.C_LIPIDOS_INDEX)));
                 alimentoEncontrado.setCarbohidratos(String.valueOf(cursor.getFloat(DBHelper.C_CARBOHIDRATOS_INDEX)));

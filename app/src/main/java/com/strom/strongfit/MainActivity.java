@@ -22,7 +22,8 @@ import com.strom.strongfit.utils.BitmapManager;
 import com.strom.strongfit.utils.SessionManager;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SalirDialogFragment.DialogListener {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener, SalirDialogFragment.DialogListener {
 
     private DrawerLayout drawerLayout; //Lo necesitamos para poner un menu lateral
     private NavigationView navigationView;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         sessionManager = new SessionManager(this);
-        if(sessionManager.checkLogin()){ //Checa si ya hay una sesion, si no la hay manda al login
+        if (sessionManager.checkLogin()) { //Checa si ya hay una sesion, si no la hay manda al login
             this.finish();
         }
         setToolBar(); //Crea la toolbar, es un metodo que esta abajo
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer_toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close){
+        drawer_toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -82,11 +83,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer_toggle.syncState();
         navigate(mNavItemId);
     }
+
     //Con esto cambiamos de pantalla
-    public boolean navigate(int itemID){
+    public boolean navigate(int itemID) {
         Log.i(TAG, "el id " + itemID);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        switch (itemID){
+        switch (itemID) {
             case R.id.home_menu:
                 MainFragment mainFragment = new MainFragment();
                 fragmentTransaction.replace(R.id.frame_content, mainFragment);
@@ -111,7 +113,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
         }
     }
-    public void setToolBar(){
+
+    public void setToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawers();
         return navigate(mNavItemId);
     }
+
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -135,12 +139,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.i(TAG, "el valor onresume es: " + mNavItemId);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);
     }
+
     //Con este metodo manejamos la entrada y salida de la aplicacion
     public void showDialog() {
         SalirDialogFragment newFragment = new SalirDialogFragment();
         newFragment.setTitulo(R.string.titulo_salir);
         newFragment.show(getSupportFragmentManager(), "Dialogo");
     }
+
     //SI elige salir
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
@@ -148,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sessionManager.logOutUser();
         finish();
     }
+
     //Si le da hueva cerrar sesion
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
