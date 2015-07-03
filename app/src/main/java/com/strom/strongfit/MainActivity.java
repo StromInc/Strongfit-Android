@@ -1,6 +1,8 @@
 package com.strom.strongfit;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements
     private final static String TAG = MainActivity.class.getSimpleName(); //Para los logs
     private String nombre = "";
     private String correo = "";
-    private String avatar = "";
+    private String avatar = "nada";
     private static ImageView imagenAvatar;
 
     @Override
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements
 
         sessionManager = new SessionManager(this);
         if (sessionManager.checkLogin()) { //Checa si ya hay una sesion, si no la hay manda al login
-            this.finish();
+            MainActivity.this.finish();
         }
         setToolBar(); //Crea la toolbar, es un metodo que esta abajo
         if (null == savedInstanceState) {
@@ -63,7 +65,14 @@ public class MainActivity extends AppCompatActivity implements
         ((TextView) findViewById(R.id.nombre_text)).setText(nombre);
         ((TextView) findViewById(R.id.email_text)).setText(correo);
         imagenAvatar = (ImageView) findViewById(R.id.profile_image);
-        BitmapManager.getInstance().loadBitmap(avatar, imagenAvatar);
+        if(!avatar.equals("nada")){
+            ConnectivityManager connMgr = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                BitmapManager.getInstance().loadBitmap(avatar, imagenAvatar);
+            }
+        }
+
         //Esto solo controla el menu lateral
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(mNavItemId).setChecked(true);

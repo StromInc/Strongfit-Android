@@ -22,10 +22,10 @@ import java.util.Map;
  */
 public class ConectarHTTP {
     //No olviden cambiar la ip, la ruta principal de neustro proyecto
-    private static final String STRONGFITURL = "http://192.168.1.75:8080/StrongFit/";
+    private static final String STRONGFITURL = "http://192.168.1.80:8080/StrongFit/";
     //Esto recupera el nombre de la clase
     private static final String TAG = ConectarHTTP.class.getSimpleName();
-    //Esto inicia sesion duh! le paso el correo y la contraseña
+    //Esto inicia sesion duh! le paso el correo y la contraseÃ±a
     public String iniciarSesion(String correo, String contra){
         HttpURLConnection httpConnection = null; //Lo usamos para establecer una conexion
         BufferedReader bufferedReader = null; //Leemos lo que nos escupa la pagina

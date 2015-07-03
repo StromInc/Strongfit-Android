@@ -106,7 +106,6 @@ public class BitmapManager {
         } catch (IOException e) {
             Log.e("IOException: ", Log.getStackTraceString(e));
         }
-
         return null;
     }
 }

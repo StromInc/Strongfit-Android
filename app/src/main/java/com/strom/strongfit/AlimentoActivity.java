@@ -177,7 +177,8 @@ public class AlimentoActivity extends AppCompatActivity implements DatePickerDia
             if (s.equals("ok")) {
                 Toast.makeText(getApplicationContext(), "Alimento agregado", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "No se pudo agregar, intentelo mas tarde", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No se pudo sincronizar, se intentara mas tarde", Toast.LENGTH_LONG).show();
+                dbOperations.agregarAlimento(idPaciente, idAlimento, gramos, dia, mes, myYear, comida);
             }
         }
     }

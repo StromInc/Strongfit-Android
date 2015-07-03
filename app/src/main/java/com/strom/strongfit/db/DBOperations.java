@@ -30,6 +30,59 @@ public class DBOperations {
             dataBase.close();
         }
     }
+    public void agregarAlimento(int idPaciente, int idAlimento, float gramos, int dia, int mes, int myYear, int comida){
+        Log.i(TAG, "insertarAlimento");
+        long numAlta = -1;
+        ContentValues values = new ContentValues();
+        SQLiteDatabase dataBase = dbHelper.getWritableDatabase();
+        try{
+            String busquedaQuery = "select " + DBHelper.C_ID_CONSUMO + " from "
+                    + DBHelper.TABLE_CONSUMO + " where " + DBHelper.C_TIPO_COMIDA + " = " + comida
+                    + " and " + DBHelper.C_PACIENTE_ID + " = " + idPaciente + " and "
+                    + DBHelper.C_DIA + " = " + dia + " and " + DBHelper.C_MES + " = " + mes
+                    + " and " + DBHelper.C_YEAR + " = " + myYear + " and "
+                    + DBHelper.C_GRAMOS + " = " + gramos;
+
+            Log.i(TAG, "busquedaQuery: " + busquedaQuery);
+            Cursor cursor = dataBase.rawQuery(busquedaQuery, null);
+            if (cursor.moveToFirst()) {
+                while(!cursor.isAfterLast()){
+                    numAlta = cursor.getInt(DBHelper.C_ID_CONSUMO_INDEX);
+                    cursor.moveToNext();
+                }
+            }
+            cursor.close();
+            Log.i(TAG, "El valor del numAlta_1 es: " + numAlta);
+            values.clear();
+            values.put(DBHelper.C_TIPO_COMIDA, comida);
+            values.put(DBHelper.C_PACIENTE_ID, idPaciente);
+            values.put(DBHelper.C_DIA, dia);
+            values.put(DBHelper.C_MES, mes);
+            values.put(DBHelper.C_YEAR, myYear);
+            values.put(DBHelper.C_GRAMOS, gramos);
+            if(numAlta == -1){
+                Log.i(TAG, "Entro al if");
+                numAlta = dataBase.insertWithOnConflict(DBHelper.TABLE_CONSUMO, null, values,
+                        SQLiteDatabase.CONFLICT_IGNORE);
+            } else{
+                Log.i(TAG, "Entro al else");
+                values.put(DBHelper.C_ID_CONSUMO, numAlta);
+                dataBase.insertWithOnConflict(DBHelper.TABLE_CONSUMO, null, values,
+                        SQLiteDatabase.CONFLICT_IGNORE);
+            }
+            values.clear();
+            Log.i(TAG, "El valor del numAlta_2 es: " + numAlta);
+            values.put(DBHelper.C_TABLE_ALIMENTO_ID, idAlimento);
+            values.put(DBHelper.C_TABLE_CONSUMO_ID, numAlta);
+            values.put(DBHelper.C_PENDIENTE, "si");
+
+            long otro =dataBase.insertWithOnConflict(DBHelper.TABLE_ALIMENTO_CONSUMO, null, values,
+                    SQLiteDatabase.CONFLICT_IGNORE);
+            Log.i(TAG, "El valor del otro es: " + otro);
+        }finally {
+            dataBase.close();
+        }
+    }
     //Este metodo nos va a traer todos los alimentos
     public ArrayList<Alimento> getTodosAlimentos(){
         ArrayList<Alimento> alimentosTodos = new ArrayList<>();
@@ -111,4 +164,5 @@ public class DBOperations {
         cursor.close();
         return alimentoEncontrado;
     }
+
 }

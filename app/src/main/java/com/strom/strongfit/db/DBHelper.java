@@ -75,11 +75,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 + C_TIPO_ALIMENTO + " int);";
         //Para la tabla de consumo
         String sqlConsumo = "create table " + TABLE_CONSUMO + " (" + C_ID_CONSUMO
-                + " int primary key, " + C_TIPO_COMIDA + " int, " + C_PACIENTE_ID + " int, "
-                + C_DIA + " int, " + C_MES + " int, " + C_YEAR + " int, " + C_GRAMOS +" int);";
+                + " integer primary key autoincrement, " + C_TIPO_COMIDA + " int, " + C_PACIENTE_ID + " int, "
+                + C_DIA + " int, " + C_MES + " int, " + C_YEAR + " int, " + C_GRAMOS +" float);";
         //Para la relacion entre las tablas anteriores
         String sqlAlimentoConsumo = "create table " + TABLE_ALIMENTO_CONSUMO + " ("
-                + C_ID_ALIMENTO_CONSUMO + " int primary key, " + C_TABLE_ALIMENTO_ID + " int, "
+                + C_ID_ALIMENTO_CONSUMO + " integer primary key autoincrement, " + C_TABLE_ALIMENTO_ID + " int, "
                 + C_TABLE_CONSUMO_ID + " int, " + C_PENDIENTE + " text);";
 
         Log.i(TAG, "onCreated sqlAimentos: " + sqlAlimentos);
