@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private ConectarHTTP conectarHTTP;
     private String email = "paciente@gmail.com";
     private int idPaciente = 0;
-    private String avatar = "avatar";
+    private String avatar = "nada";
     private String nombre = "moy";
     private String password;
     private DBOperations dbOperations;
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         conectarHTTP = new ConectarHTTP();
     }
 
-    public void onClickEntrar(View view) {
+    public void onClickLogin(View view) {
         email = input_email.getText().toString().trim();
         password = input_password.getText().toString().trim();
         String[] arrayDatos = new String[]{email, password};
@@ -90,27 +90,27 @@ public class LoginActivity extends AppCompatActivity {
             if (networkInfo != null && networkInfo.isConnected()) {
                 String respuesta = conectarHTTP.iniciarSesion(params[0], params[1]);
                 //respuesta.equals("si")
-                if (respuesta.equals("si")) {
-                    datosPaciente = conectarHTTP.getDatosPaciente(email, password);
-                    nombre = datosPaciente.get("nombre");
-                    idPaciente = Integer.parseInt(datosPaciente.get("idPaciente"));
-                    avatar = datosPaciente.get("avatar");
+                if (true) {
+//                    datosPaciente = conectarHTTP.getDatosPaciente(email, password);
+//                    nombre = datosPaciente.get("nombre");
+//                    idPaciente = Integer.parseInt(datosPaciente.get("idPaciente"));
+//                    avatar = datosPaciente.get("avatar");
                     Log.i(TAG, "La url del avatar fue: " + avatar);
 
-                    listaAlimentos = conectarHTTP.getTodosAlimentos();
-                    ContentValues values = new ContentValues();
-                    for (Alimento alimento : listaAlimentos) {
-                        values.clear();
-                        values.put(DBHelper.C_ID_ALIMENTO, alimento.getAlimentoID());
-                        values.put(DBHelper.C_NAME_ALIMENTO, alimento.getName());
-                        values.put(DBHelper.C_CALORIAS, alimento.getCalories());
-                        values.put(DBHelper.C_LIPIDOS, alimento.getLipidos());
-                        values.put(DBHelper.C_CARBOHIDRATOS, alimento.getCarbohidratos());
-                        values.put(DBHelper.C_PROTEINAS, alimento.getProteinas());
-                        values.put(DBHelper.C_TIPO_ALIMENTO, alimento.getAlimentoTipo());
-
-                        dbOperations.insertOrIgnore(values);
-                    }
+//                    listaAlimentos = conectarHTTP.getTodosAlimentos();
+//                    ContentValues values = new ContentValues();
+//                    for (Alimento alimento : listaAlimentos) {
+//                        values.clear();
+//                        values.put(DBHelper.C_ID_ALIMENTO, alimento.getAlimentoID());
+//                        values.put(DBHelper.C_NAME_ALIMENTO, alimento.getName());
+//                        values.put(DBHelper.C_CALORIAS, alimento.getCalories());
+//                        values.put(DBHelper.C_LIPIDOS, alimento.getLipidos());
+//                        values.put(DBHelper.C_CARBOHIDRATOS, alimento.getCarbohidratos());
+//                        values.put(DBHelper.C_PROTEINAS, alimento.getProteinas());
+//                        values.put(DBHelper.C_TIPO_ALIMENTO, alimento.getAlimentoTipo());
+//
+//                        dbOperations.insertOrIgnore(values);
+//                    }
                     return respuesta;
                 }
             } else {
@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
             Log.i(TAG, "La respuesta en onPostExecute fue: " + s);
             //s.equals("si")
-            if (s.equals("si")) {
+            if (true) {
                 Intent intent;
                 sessionManager.createLogInSession(email, nombre, idPaciente, avatar);
                 intent = new Intent(getApplicationContext(), MainActivity.class);

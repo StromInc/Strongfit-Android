@@ -37,4 +37,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="titulo_salir">¿Seguro?</string>
     <string name="titulo_borrar_alimento">¿Quieres borrar este alimento?</string>
+    <string name="home_item">Inicio</string>
+    <string name="alimentos_item">Alimentos</string>
+    <string name="profile_item">Mi Perfil</string>
+    <string name="logout_item">Cerrar Sesion</string>
+    <string name="settings_item">Configuracion</string>
 </resources>

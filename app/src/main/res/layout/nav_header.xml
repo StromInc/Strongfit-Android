@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="178dp"
+    android:layout_height="@dimen/header_height"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="@drawable/chiles">
+    android:padding="@dimen/header_left_padding"
+    android:background="@drawable/chiles"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/profile_image_size"
+        android:layout_height="@dimen/profile_image_size"
         android:src="@drawable/archivo1"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="38dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="40dp"
         app:border_width="1dp"
         app:border_color="@color/text_color"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -29,22 +31,17 @@
             android:id="@+id/nombre_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textColor="#ffffff"
             android:text="Moises"
-            android:textSize="14sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/email_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
-            android:text="Peso: 70kg"
-            android:textSize="14sp"
-            android:textStyle="normal"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="Peso: 70kg" />
 
     </LinearLayout>
 

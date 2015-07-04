@@ -25,8 +25,9 @@ public class ConectarHTTP {
     private static final String STRONGFITURL = "http://192.168.1.80:8080/StrongFit/";
     //Esto recupera el nombre de la clase
     private static final String TAG = ConectarHTTP.class.getSimpleName();
+
     //Esto inicia sesion duh! le paso el correo y la contraseña
-    public String iniciarSesion(String correo, String contra){
+    public String iniciarSesion(String correo, String contra) {
         HttpURLConnection httpConnection = null; //Lo usamos para establecer una conexion
         BufferedReader bufferedReader = null; //Leemos lo que nos escupa la pagina
         StringBuilder response = null; //Crea un string en base al buffer
@@ -55,7 +56,7 @@ public class ConectarHTTP {
             bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
             String linea;
             response = new StringBuilder();
-            while((linea = bufferedReader.readLine()) != null){
+            while ((linea = bufferedReader.readLine()) != null) {
                 response.append(linea);
             }
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
@@ -63,15 +64,16 @@ public class ConectarHTTP {
         } catch (Exception e) {
             e.printStackTrace();
             return "Error 90";
-        }finally {
+        } finally {
             if (httpConnection != null) {
                 httpConnection.disconnect(); //Cerramos la conexion
             }
         }
     }
+
     //Hace lo mismo que la de arriba pero con otros datos
     //Obtiene todos nuestros alimentos
-    public ArrayList<Alimento> getTodosAlimentos(){
+    public ArrayList<Alimento> getTodosAlimentos() {
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
         StringBuilder response = null;
@@ -88,7 +90,7 @@ public class ConectarHTTP {
             bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
             String linea;
             response = new StringBuilder();
-            while((linea = bufferedReader.readLine()) != null){
+            while ((linea = bufferedReader.readLine()) != null) {
                 response.append(linea);
             }
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
@@ -96,7 +98,7 @@ public class ConectarHTTP {
             JSONObject alimentosJsonObject;
             //Recorremos el json y obtenemos lo que necesitamos agregandolo al modelo de alimento
             //Para despues meterlo en un arrayList
-            for (int i=0; i<jsonArray.length(); i++) {
+            for (int i = 0; i < jsonArray.length(); i++) {
                 alimentosJsonObject = (JSONObject) jsonArray.get(i);
                 Alimento alimento = new Alimento();
 
@@ -113,15 +115,16 @@ public class ConectarHTTP {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (httpConnection != null) {
                 httpConnection.disconnect();
             }
         }
         return alimentos;
     }
+
     //Registra el alimento en base a la fecha
-    public String registrarAlimento(int idPaciente, int idAlimento, float gramos, int day, int month, int year, int tipoComida){
+    public String registrarAlimento(int idPaciente, int idAlimento, float gramos, int day, int month, int year, int tipoComida) {
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
         StringBuilder response = null;
@@ -150,7 +153,7 @@ public class ConectarHTTP {
             bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
             String linea;
             response = new StringBuilder();
-            while((linea = bufferedReader.readLine()) != null){
+            while ((linea = bufferedReader.readLine()) != null) {
                 response.append(linea);
             }
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
@@ -158,14 +161,15 @@ public class ConectarHTTP {
         } catch (Exception e) {
             e.printStackTrace();
             return "Error 90";
-        }finally {
+        } finally {
             if (httpConnection != null) {
                 httpConnection.disconnect();
             }
         }
     }
+
     //Obtenemos el id del paciente, el nombre y su foto
-    public Map<String, String> getDatosPaciente(String correo, String contra){
+    public Map<String, String> getDatosPaciente(String correo, String contra) {
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
         StringBuilder response = null;
@@ -193,7 +197,7 @@ public class ConectarHTTP {
             bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
             String linea;
             response = new StringBuilder();
-            while((linea = bufferedReader.readLine()) != null){
+            while ((linea = bufferedReader.readLine()) != null) {
                 response.append(linea);
             }
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
@@ -204,15 +208,16 @@ public class ConectarHTTP {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (httpConnection != null) {
                 httpConnection.disconnect();
             }
         }
         return datosPaciente;
     }
+
     //Recupera todos los alimentos consumidos en alguna fecha
-    public ArrayList<Consumido> getAlimentosFecha(int dia, int mes, int year, int idPaciente){
+    public ArrayList<Consumido> getAlimentosFecha(int dia, int mes, int year, int idPaciente) {
         ArrayList<Consumido> consumidos = new ArrayList<Consumido>();
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
@@ -241,13 +246,13 @@ public class ConectarHTTP {
             bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
             String linea;
             response = new StringBuilder();
-            while((linea = bufferedReader.readLine()) != null){
+            while ((linea = bufferedReader.readLine()) != null) {
                 response.append(linea);
             }
             JSONArray jsonArray = new JSONArray(response.toString());
             JSONObject alimentosJsonObject;
 
-            for (int i=0; i<jsonArray.length(); i++) {
+            for (int i = 0; i < jsonArray.length(); i++) {
                 alimentosJsonObject = (JSONObject) jsonArray.get(i);
                 Consumido alimento = new Consumido();
 
@@ -259,15 +264,16 @@ public class ConectarHTTP {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (httpConnection != null) {
                 httpConnection.disconnect();
             }
         }
         return consumidos;
     }
+
     //Borra el alimento a la verga
-    public String borrarAlimento(int idAlta){
+    public String borrarAlimento(int idAlta) {
         HttpURLConnection httpConnection = null;
         BufferedReader bufferedReader = null;
         StringBuilder response = null;
@@ -295,7 +301,7 @@ public class ConectarHTTP {
             bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
             String linea;
             response = new StringBuilder();
-            while((linea = bufferedReader.readLine()) != null){
+            while ((linea = bufferedReader.readLine()) != null) {
                 response.append(linea);
             }
             Log.i(TAG, "La respuesta del servidor: " + response.toString());
@@ -303,7 +309,7 @@ public class ConectarHTTP {
         } catch (Exception e) {
             e.printStackTrace();
             return "Error 90";
-        }finally {
+        } finally {
             if (httpConnection != null) {
                 httpConnection.disconnect();
             }

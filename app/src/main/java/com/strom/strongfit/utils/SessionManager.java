@@ -63,7 +63,7 @@ public class SessionManager {
         return preferencias.getBoolean(IS_LOGIN, false);
     }
     public String getAvatar(){
-        return preferencias.getString(KEY_AVATAR, "Nana");
+        return preferencias.getString(KEY_AVATAR, "nada");
     }
     public String getName(){
         return preferencias.getString(KEY_NAME, "Moises de Patzi");
